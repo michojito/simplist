@@ -11,26 +11,40 @@ import { color, font, spacing } from "../global";
 
 
 interface Props {
-    data: Task[]
-    setData: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
-    isEdit: boolean
-    setEdit: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    accentColor: {
+        content: {main: string;text: string;}
+        set: (newValue: { main: string; text: string;} | ((currValue: {main: string;text: string;}) => {main: string;text: string;})) => void}
+    data: {
+        content: Task[],
+        set: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
+    }
+    isEditOpen: {
+        content : boolean,
+        set: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    }
 }
 
 export function EditWindow (props: Props) {
 
     function deleteTask (id: number) {
-        let filtered = props.data.filter(task => {
+        let filtered = props.data.content.filter(task => {
             return task.id !== id
         })
-        props.setData(filtered)
+        props.data.set(filtered)
     }
 
-    const [text, setText] = useSyncedState("accentColorChange", color.accent)
+    function setAccent(color: string) : string{
+        if (/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
+          props.accentColor.set({main: color, text: '#fff'})
+        }
+        return props.accentColor.content.main
+      }
+
+    const [text, setText] = useSyncedState("accentColorChange", props.accentColor.content.main)
 
     return (
         <Window direction="vertical">
-            <EditHeading title='Todo' onClick={() => {props.setEdit(!props.isEdit); color.setAccent(text)}} />
+            <EditHeading accentColor={props.accentColor.content} title='Todo' onClick={() => {props.isEditOpen.set(!props.isEditOpen.content);}} />
             <Separator />
             <AutoLayout name="Content" direction="vertical"
                 spacing={spacing.higher} horizontalAlignItems="center" width='fill-parent'>
@@ -39,14 +53,14 @@ export function EditWindow (props: Props) {
                     <AutoLayout name='Text Container' width='fill-parent' spacing={spacing.lower}>
                         <Text fontSize={font.body} fontWeight={500} fill={color.text}>Accent Color</Text>
 
-                        <Input value={text} placeholder={color.accent} width='fill-parent' fontSize={font.body} fill={color.greyLow}
-                        onTextEditEnd={(e) => { setText(e.characters); color.setAccent(e.characters);}} placeholderProps={{opacity: 1}} />
+                        <Input value={text} placeholder={props.accentColor.content.main} width='fill-parent' fontSize={font.body} fill={color.greyLow}
+                        onTextEditEnd={(e) => { setText(e.characters); setAccent(e.characters)}} placeholderProps={{opacity: 1}} />
                     </AutoLayout>
-                    <Button><Frame width={24} height={24}/></Button>
+                    <Button plainColor={props.accentColor.content.main}><Frame width={24} height={24}/></Button>
                 </AutoLayout>
 
                 <AutoLayout name="Item List" direction="vertical" width='fill-parent' spacing={spacing.none}>
-                    {props.data.map( d => {
+                    {props.data.content.map( d => {
                         return (
                             <>
                                 <EditTaskItem key={d.id} task={d} onClick={ () => {deleteTask(d.id)} } />

@@ -12,7 +12,7 @@ type Props = {
 export function Window (props: Props) {
     return (
       <AutoLayout
-        name="Main"
+        name='Main'
         effect={[
           {
             type: "drop-shadow",
