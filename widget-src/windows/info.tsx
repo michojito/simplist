@@ -64,7 +64,7 @@ export function InfoWindow (props : Props) {
                     fontSize={font.footnote}
                     fontWeight={500}
                     >
-                    version {Infos.version}
+                    version {Infos.version} - Still WIP
                 </Text>
             </AutoLayout>
             <Text
