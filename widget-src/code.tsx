@@ -5,8 +5,10 @@ const { widget } = figma
 const { useSyncedState } = widget
 
 // Imports
-import { Colors } from './constants'
+//import { Colors } from './constants'
 import { shadeColor } from './utils'
+import { Window } from './views/containers/Window'
+import { Header } from './views/header/HeaderBase'
 
 // Components
 
@@ -21,37 +23,41 @@ function Main () {
     editOpen: false,
     settingOpen: false,
     infoOpen: false,
-    firstOpen: false
   })
 
   // Colors
   const [lightMode, setLightMode] = useSyncedState('lightMode', true)
   const [color, setColor] = useSyncedState('color', {})
 
-  // Open Onboarding View
-  if (!mode.firstOpen) {
-    return (
-      <></>
-    )
-  }
+
   // Open Setting View
-  if (!mode.settingOpen) {
+  if (mode.settingOpen) {
     return (
       <></>
     )
   }
   // Open Edit View
-  if (!mode.editOpen) {
+  if (mode.editOpen) {
     return (
       <></>
     )
   }
   // Open PowerMode View
-  if (!mode.powerMode) {
+  if (mode.powerMode) {
     return (
       <></>
     )
   }
+
+  return (
+    <Window>
+      <Header title='Todo'/>
+      {
+        // <Input>
+        // Main Content -> Empty | List
+      }
+    </Window>
+  )
 
   
  
