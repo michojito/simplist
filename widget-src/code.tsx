@@ -2,74 +2,88 @@
 // Simplist is a simple To Do List for Figma and Figjam
 
 const { widget } = figma
-const { useSyncedState, useEffect, usePropertyMenu, AutoLayout, Text } = widget
+const { useSyncedMap, useSyncedState, usePropertyMenu, AutoLayout, Text } = widget
 
-
-//Windows
+// Imports
+import { Task } from "./class/Task"
+import { EditWindow } from "./windows/edit"
 import { InfoWindow } from "./windows/info"
+import { MainWindow } from "./windows/main"
 import { MenuWindow } from "./windows/menu"
 
-import { Task } from "./class/Task"
-import { MainWindow } from "./windows/main"
-import { EditWindow } from "./windows/edit"
-import { color } from "./global"
 
+/* Main function that handle the whole Widget */
 function Main () {
 
-  //usePropertyMenu()
+  // Data
   const initialValue : Task[] = []
   const [data, setData] = useSyncedState("data", initialValue)
 
-  const [isEdit, setEdit] = useSyncedState('state', false)
-  const [hasMenu, setMenu] = useSyncedState("hasMenu", false)
-  const [hasInfo, setInfo] = useSyncedState("hasInfo", false)
-  const [hideCompleted, setHideCompleted] = useSyncedState("hideCompleted", false)
+  // State Machine
+  const [isPowerMode, setPowerMode] = useSyncedState('isPowerMode', false)
+  const [isEditOpen, setEditOpen] = useSyncedState('isEditOpen', false)
+  const [isSettingsOpen, setSettingsOpen] = useSyncedState('isSettingsOpen', false)
+  const [isInfosOpen, setInfosOpen] = useSyncedState('isInfosOpen', false)
+  const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', false)
+
+  const [accentColor, setAccentColor] = useSyncedState('accentColor', 
+  {main: '#0038FF',  text: '#FFF'})
 
 
   return (
-    <AutoLayout
-      name="Widget"
-      overflow="visible"
-      >
-      { // Main Window
-        !isEdit && 
-        <MainWindow data={data} setData={setData} hasMenu={hasMenu} setMenu={setMenu} hideCompleted={hideCompleted} />
-      }
-      { // Edit Window
-        isEdit && 
-        <EditWindow data={data} setData={setData} isEdit={isEdit} setEdit={setEdit} />
-      }
+    <AutoLayout name='Widget' overflow='visible'>
 
-      {   // Info Window
-          hasInfo && (
-            <AutoLayout
-            name="Info Container"
-            positioning="absolute"
-            x={{
-              type: "left",
-              offset: -260,
-            }}
-            y={{
-              type: "top",
-              offset: 0,
-            }}>
-            <InfoWindow setInfo={setInfo}/>
+      { 
+        // Main Window Selector (Main | Power | Edit)
+
+        isEditOpen ? (
+
+          <EditWindow 
+            accentColor={{content: accentColor, set: setAccentColor}}
+            data={{content: data, set: setData}}
+            isEditOpen={{content: isEditOpen, set:setEditOpen}} />
+
+        ) : isPowerMode ? (
+
+          <Text>Power Mode</Text>
+
+        ) : (
+
+          <MainWindow 
+            accentColor={accentColor}
+            data={{content: data, set:setData}}
+            isSettingsOpen={{content:isSettingsOpen, set:setSettingsOpen}}
+            isHideCompleted={isHideCompleted}/>
+
+        )
+      }
+      {
+        // If Info is True open the Info Window
+
+        isInfosOpen && (
+          <AutoLayout name='Infos Window' positioning='absolute'
+            x={{type: 'left', offset: -260}} y={{type: 'top', offset: 0}}>
+              <InfoWindow 
+                accentColor={accentColor}
+                setInfo={setInfosOpen} />
           </AutoLayout>
-      )}
-      {   // Menu
-          hasMenu && (
-            <AutoLayout
-              name="Menu Container"
-              positioning="absolute"
-              x={{
-                type: "right",
-                offset: -157,
-              }}
-              y={50}>
-              <MenuWindow setMenu={setMenu} setInfo={setInfo} data={setData} setEdit={setEdit} hideCompleted={hideCompleted} setHideCompleted={setHideCompleted}/>
-            </AutoLayout>
-      )}
-
+        )
+      }
+      {
+        // If Settings are True opwn the Settings Window
+        
+        isSettingsOpen && (
+          <AutoLayout name='Settings Window' positioning='absolute'
+            x={{type: 'right', offset: -157}} y={50}>
+              <MenuWindow 
+                setSettingsOpen={setSettingsOpen}
+                setInfosOpen={setInfosOpen}
+                setEditOpen={setEditOpen}
+                isHideCompleted={{content: isHideCompleted, set: setHideCompleted}}
+                setData={setData} />
+          </AutoLayout>
+        )
+      }
     </AutoLayout>
   )
 }

@@ -1,77 +1,87 @@
 const { widget } = figma
 const { AutoLayout, Text } = widget
-import { color, spacing, font, cornerRadius, Infos } from '../global'
+
 
 //Components
+import { Task } from "../class/Task"
+
 import { Window } from "../components/window"
-import { Heading } from '../components/heading'
-import { Separator } from '../components/separator'
-import { InputBar } from '../components/input'
-import { TaskItem } from '../components/task'
-import { Task } from '../class/Task'
-import { EmptyState } from '../components/illustration'
+import { Separator } from "../components/separator"
+import { Heading } from "../components/heading"
+import { InputBar } from "../components/input"
+import { spacing } from "../global"
+import { EmptyState } from "../components/illustration"
+import { TaskItem } from "../components/task"
+
+
 
 
 interface Props {
-    data: Task[]
-    setData: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
-    hasMenu: boolean
-    setMenu: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-    hideCompleted: boolean
+  data: {
+    content: Task[],
+    set: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
+  }
+  accentColor: {main: string; text: string;}
+  isSettingsOpen:{
+    content: boolean, 
+    set: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+  }
+  isHideCompleted: boolean
+
 }
 
 export function MainWindow (props : Props) {
 
-    
-    function checkTask (id: number) {
-        let mapped = props.data.map( task => {
-          return task.id == id ? {...task, check: !task.check} : {...task}
-        });
-        props.setData(mapped)
-      }
-    
-      function openTask (id: number) {
-        let mapped = props.data.map( task => {
-          return task.id == id ? {...task, open: !task.open} : {...task}
-        });
-        props.setData(mapped)
-      }
-    return (
-        <Window direction="vertical">
-        <Heading title='Todo' onClick={() => props.setMenu(!props.hasMenu)}/>
-        <Separator />
-        <AutoLayout name="Content" direction="vertical"
-          spacing={spacing.higher} horizontalAlignItems="center" width='fill-parent'>
-            <InputBar data={props.setData}/>
-            <AutoLayout name="Item List" direction="vertical" width='fill-parent' spacing={spacing.none}>
-              {props.data === undefined || props.data.length == 0 ? (
-                <EmptyState />
-              ) : props.data.map( d => {
-                    if (!props.hideCompleted) {
-                        return (
-                            <>
-                                <TaskItem key={d.id} task={d} onClick={{
-                                    check:() => {checkTask(d.id)},
-                                    open:() => {openTask(d.id)},
-                                  }} />
-                                <Separator type='task' />
-                            </>
-                        )
-                    }
-                    if (!d.check) {
-                        return (
-                            <>
-                                <TaskItem key={d.id} task={d} onClick={{
-                                    check:() => {checkTask(d.id)},
-                                    open:() => {openTask(d.id)},
-                                  }} />
-                                <Separator type='task' />
-                            </>
-                        )
-                    }
-              })}
-            </AutoLayout>
+  function checkTask (id: number) {
+    let mapped = props.data.content.map( task => {
+      return task.id == id ? {...task, check: !task.check} : {...task}
+    });
+    props.data.set(mapped)
+  }
+
+  return (
+    <Window direction="vertical">
+      <Heading title='Todo' accentColor={props.accentColor} 
+        onClick={ () => props.isSettingsOpen.set(!props.isSettingsOpen.content)}/>
+      <Separator />
+      <AutoLayout name='Content' direction='vertical' horizontalAlignItems='center' width='fill-parent' spacing={spacing.higher}>
+        <InputBar  accentColor={props.accentColor} data={props.data.set}/>
+        <AutoLayout name='Item List' direction='vertical' width='fill-parent' spacing={spacing.none}>
+          {
+            // If list is Empty
+            props.data === undefined || props.data.content.length == 0 ? (
+              <EmptyState/>
+            ) : props.data.content.map( d => {
+
+                // If hideCompleted is not checked return ckecked task
+                if (!props.isHideCompleted) {
+                  return (
+                    <>
+                      <TaskItem key={d.id} task={d} accentColor={props.accentColor}
+                        onClick={{
+                          check:() => {checkTask(d.id)}
+                          }}/>
+                      <Separator key={`separator-${d.id}`} type='task' />
+                    </>
+                  )
+                }
+                // return unchecked task
+                if (!d.check) {
+                  return (
+                    <>
+                      <TaskItem key={d.id} task={d} accentColor={props.accentColor}
+                        onClick={{
+                          check:() => {checkTask(d.id)}
+                          }}/>
+                      <Separator key={`separator-${d.id}`} type='task' />
+                    </>
+                  )
+                }
+                
+            })
+          }
         </AutoLayout>
-      </Window>
-    )
+      </AutoLayout>
+    </Window>
+  )
 }

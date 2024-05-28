@@ -9,12 +9,14 @@ import { Separator } from '../components/separator'
 import { Task } from '../class/Task'
 
 interface MenuProps {
-    setMenu: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-    setInfo: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-    setEdit: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-    setHideCompleted: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-    hideCompleted: boolean
-    data: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
+    setSettingsOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    setInfosOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    setEditOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    isHideCompleted: {
+        content: boolean,
+        set: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+    }
+    setData: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
 }
 
 export function MenuWindow (props: MenuProps) {
@@ -32,14 +34,14 @@ export function MenuWindow (props: MenuProps) {
                 width="fill-parent"
                 verticalAlignItems="center"
                 >
-                    <MenuItem onClick={() => { props.setMenu(false); props.setEdit(true) }}>
+                    <MenuItem onClick={() => { props.setSettingsOpen(false); props.setEditOpen(true) }}>
                         <Slider color={color.black} size={[16,16]}/>
                         <Text fontFamily="Inter" fontSize={17} fontWeight={500} fill={color.black}>
                             Edit
                         </Text>
                     </MenuItem>
-                    <MenuItem onClick={() => { props.setMenu(false); props.setHideCompleted(!props.hideCompleted) }}>
-                        { props.hideCompleted ? 
+                    <MenuItem onClick={() => { props.setSettingsOpen(false); props.isHideCompleted.set(!props.isHideCompleted.content) }}>
+                        { props.isHideCompleted.content ? 
                                 (<>
                                     <Eye color={color.black} size={[16,16]}/>
                                     <Text fontFamily="Inter" fontSize={17} fontWeight={500} fill={color.black}>
@@ -55,14 +57,14 @@ export function MenuWindow (props: MenuProps) {
                         }
                     </MenuItem>
                     <Separator/>
-                    <MenuItem onClick={() => { props.setMenu(false); props.setInfo(true) }}>
+                    <MenuItem onClick={() => { props.setSettingsOpen(false); props.setInfosOpen(true) }}>
                         <InfoCircle color={color.black} size={[16,16]}/>
                         <Text fontFamily="Inter" fontSize={17} fontWeight={500} fill={color.black}>
                             Infos
                         </Text>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem onClick={() => { props.setMenu(false); props.data([]) }}>
+                    <MenuItem onClick={() => { props.setSettingsOpen(false); props.setData([]) }}>
                         <TrashOutline color={color.error} size={[16,16]}/>
                         <Text fontFamily="Inter" fontSize={17} fontWeight={500} fill={color.error}>
                             Clear all

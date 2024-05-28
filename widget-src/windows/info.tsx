@@ -8,6 +8,7 @@ import { Button } from '../components/button'
 import { Globe, Logo, LogoGithub } from '../components/icons'
 
 interface Props {
+    accentColor: {main: string;text: string;}
     setInfo: (newValue: boolean | ((currValue: boolean) => boolean)) => void
 }
 
@@ -23,18 +24,22 @@ export function InfoWindow (props : Props) {
                 horizontalAlignItems="end"
                 verticalAlignItems="center"
             >
-                <Button type='ghost' onClick={() => console.log(`click`)}><Globe color={color.greyLow} size={[16,16]} /></Button>
-                <Button type='ghost' onClick={() => console.log(`click`)}><LogoGithub color={color.greyLow} size={[16,16]} /></Button>
+                <Button type='ghost' href='https://mr-michel.com' onClick={() => console.log(`click`)}>
+                    <Globe color={color.greyLow} size={[16,16]} />
+                </Button>
+                <Button type='ghost' href='https://github.com/MrMichelr' onClick={() => console.log(`click`)}>
+                    <LogoGithub color={color.greyLow} size={[16,16]} />     
+                </Button>
             </AutoLayout>
             <AutoLayout
                 name="Logo Container"
                 spacing={spacing.none}
                 horizontalAlignItems="center"
                 verticalAlignItems="center"
-                fill={color.accent}
+                fill={props.accentColor.main}
                 cornerRadius={cornerRadius.medium}
             >
-                <Logo color={color.textAccent} size={[52,52]}/>
+                <Logo color={props.accentColor.text} size={[52,52]}/>
             </AutoLayout>
             <AutoLayout
                 name="Heading"
@@ -59,7 +64,7 @@ export function InfoWindow (props : Props) {
                     fontSize={font.footnote}
                     fontWeight={500}
                     >
-                    version {Infos.version}
+                    version {Infos.version} - Still WIP
                 </Text>
             </AutoLayout>
             <Text
@@ -72,12 +77,13 @@ export function InfoWindow (props : Props) {
                 Copyright © {new Date().getFullYear()} {Infos.author}
             </Text>
             <Button
+                plainColor={props.accentColor.main}
                 width="fill-parent"
                 onClick={() => props.setInfo(false)}
                 >
                 <Text
                     name="Text"
-                    fill={color.textAccent}
+                    fill={props.accentColor.text}
                     fontFamily="Inter"
                     fontSize={font.body}
                     fontWeight={500}

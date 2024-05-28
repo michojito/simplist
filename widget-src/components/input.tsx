@@ -6,6 +6,7 @@ import { Button } from './button'
 import { Plus } from './icons'
 
 interface Props {
+    accentColor: {main: string;text: string;}
     data: (newValue: Task[] | ((currValue: Task[]) => Task[])) => void
 }
 export function InputBar (props: Props) {
@@ -39,6 +40,7 @@ export function InputBar (props: Props) {
                 />
 
                 <Button 
+                    plainColor={props.accentColor.main}
                     onClick={() => {
                         if (text === undefined || text === ''){
                             setErr(true);
@@ -47,7 +49,7 @@ export function InputBar (props: Props) {
                             props.data( previousData => previousData.concat(new Task(false, text))); setText('') 
                         }
                         }} >
-                    <Plus color={color.textAccent} />
+                    <Plus color={props.accentColor.text} />
                 </Button>
 
             </AutoLayout>

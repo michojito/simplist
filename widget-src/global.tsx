@@ -17,22 +17,8 @@ class Color{
   error = `#E30044`
 
   text = `#000`
-
-  accent = `#0038FF`
-  textAccent = `#FFF`
-
-  resetAccent() {
-    this.accent = `#0038FF`
-    this.textAccent = `#FFF`
-  }
-
-  setAccent(color: string) : string{
-    if (/^#([0-9A-F]{3}){1,2}$/i.test(color)) {
-      this.accent = color
-    }
-    return this.accent
-  }
 }
+
 export var color = new Color()
 
 export enum cornerRadius {

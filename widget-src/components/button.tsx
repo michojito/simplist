@@ -12,6 +12,8 @@ enum Type {
 interface ButtonProps extends BaseProps, WidgetJSX.AutoLayoutSizeProps {
     type? : Type | String;
     children: FigmaDeclarativeNode | null;
+    plainColor?: string
+    href?: string
 }
 
 export function Button (props: ButtonProps) {
@@ -81,10 +83,10 @@ export function Button (props: ButtonProps) {
                     spacing={spacing.lower}
                     padding={spacing.low2}
                     cornerRadius={cornerRadius.low}
-                    fill={color.accent}
+                    fill={props.plainColor}
                     {...props}
                     hoverStyle={{
-                        fill: `${shadeColor(color.accent, -20)}`,
+                        fill: `${shadeColor(props.plainColor || '#fff', -20)}`,
                       }}
                 >
                     {props.children}

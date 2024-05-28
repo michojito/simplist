@@ -7,21 +7,20 @@ import { Button } from "./button";
 import { Checkmark, Plus, TrashOutline } from "./icons";
 
 interface Props {
+    accentColor: {main: string; text: string;}
     task: Task
     onClick?: {
         check?: (event: WidgetClickEvent) => Promise<any> | void,
-        open?: (event: WidgetClickEvent) => Promise<any> | void,
-        addSubtask?: (event: WidgetClickEvent) => Promise<any> | void,
     }
 }
 
 export function TaskItem (props: Props) {
 
     return (
-        <AutoLayout name='Task' spacing={spacing.lower} width='fill-parent' padding={{vertical:spacing.low, horizontal:spacing.none}} >
-            <Checkbox completed={props.task.check} onClick={props.onClick!.check || undefined}/>
+        <AutoLayout key={props.task.id} name='Task' spacing={spacing.lower} width='fill-parent' padding={{vertical:spacing.low, horizontal:spacing.none}} >
+            <Checkbox accentColor={props.accentColor} completed={props.task.check} onClick={props.onClick!.check || undefined}/>
             <AutoLayout name="Content" direction="vertical" spacing={spacing.lower} verticalAlignItems="center" width='fill-parent' overflow="visible">
-                <AutoLayout name="Heading" spacing={spacing.lower} verticalAlignItems="center" width='fill-parent' onClick={props.onClick!.open || undefined}>
+                <AutoLayout name="Heading" spacing={spacing.lower} verticalAlignItems="center" width='fill-parent' >
                     <Text
                         fontSize={font.body}
                         fontWeight={500}
@@ -33,7 +32,7 @@ export function TaskItem (props: Props) {
                 </AutoLayout>
                 { props.task.open && !props.task.check && (
                     <AutoLayout name='Meta' spacing={spacing.lower} width="fill-parent" verticalAlignItems="center" overflow="visible">
-                        <Button type='ghost' onClick={ props.onClick!.addSubtask || undefined }>
+                        <Button type='ghost'>
                             <Plus color={color.greyLow} size={[16,16]} />
                             <Text fill={color.greyLow} fontSize={font.footnote} fontWeight={500}>Add Subtask</Text>
                         </Button>
@@ -70,6 +69,7 @@ export function EditTaskItem (props: EditProps) {
 }
 
 interface CheckProps {
+    accentColor: {main: string; text: string;}
     completed: boolean
     onClick?: (event: WidgetClickEvent) => Promise<any> | void
 }
@@ -80,7 +80,7 @@ function Checkbox (props: CheckProps) {
         <AutoLayout
             name="Checkbox"
             fill={props.completed ? color.greyVeryLow : color.white}
-            stroke={props.completed ? color.greyLow : color.accent}
+            stroke={props.completed ? color.greyLow : props.accentColor.main}
             cornerRadius={cornerRadius.low}
             strokeWidth={2}
             width={24}
