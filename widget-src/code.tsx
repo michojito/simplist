@@ -6,8 +6,11 @@ const { useSyncedState } = widget
 
 // Imports
 import { ColorPalette } from './constants'
+import { EmptyPage } from './pages/main/EmptyPage'
+import { MainPage } from './pages/main/MainPage'
 import { Window } from './views/containers/Window'
 import { Header } from './views/header/HeaderBase'
+import { IlluEmpty } from './views/illustrations/IlluEmpty'
 
 // Components
 
@@ -49,14 +52,7 @@ function Main () {
   }
 
   return (
-    <Window fill={color.background.primary} stroke={color.neutrals.lowest}>
-      {console.log(color)}
-      <Header title='Todo' colors={color}/>
-      {
-        // <Input>
-        // Main Content -> Empty | List
-      }
-    </Window>
+    <MainPage color={color}/>
   )
 
   

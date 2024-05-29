@@ -20,7 +20,7 @@ export function Icon (props: Props){
         size = {w: 24, h: 24}
 
     } else if (props.size === 'large') {
-        size = {w: 32, h: 32}
+        size = {w: 36, h: 36}
 
     } else {
         size = {w: props.size?.w || 24, h: props.size?.h|| 24}
