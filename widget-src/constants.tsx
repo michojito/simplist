@@ -110,8 +110,8 @@ export class ColorPalette {
             accent   : lightMode ? Colors.neutrals[0] : Colors.neutrals[0],
         }
         this.accent = {
-            medium: lightMode ? Colors.accent.blue : shadeColor(Colors.accent.blue, -20),
-            high  : lightMode ? shadeColor(Colors.accent.blue, 20) : Colors.accent.blue,
+            medium: lightMode ? Colors.accent.blue : shadeColor(Colors.accent.blue, 30),
+            high  : lightMode ? shadeColor(Colors.accent.blue, -20) : Colors.accent.blue,
         }
     }
 }

@@ -34,29 +34,29 @@ export function IlluEmpty (props: Props) {
                 <path d="M28.5827 101.467C30.2443 101.24 32.8075 107.058 32.8352 109.462C30.5069 109.599 26.7966 110.964 25.2325 111.629C24.8723 108.444 26.9211 101.694 28.5827 101.467Z" 
                     fill="${props.colors?. secondary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.6'}"/>
                 <path d="M105 66C114.6 56.8 114.333 36.8333 113 28C114.167 30.5 116.6 37.1 117 43.5C117.5 51.5 118 54 110.5 68C103 82 86.5 85 81 85C75.5 85 70.6193 84.8274 64 84C56 83 53 71 55 71C56 71 58.2692 79.4977 67 80C81 80.8054 98.4367 72.2898 105 66Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <path d="M91.5 108.5C91.1 103.7 85 91.1667 82 85.5C84.6667 89.3333 90.4 97.7 92 100.5C94 104 96 113 95.5 115.5C95 118 93.5 120.5 90.5 123C88.1 125 84.8333 124.833 83.5 124.5L85 120.5C87.3333 118.5 91.9 113.3 91.5 108.5Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <path d="M81.5 101.5C84.3 101.5 85.6667 111.167 86 116L83 125.5H77.5C64.5 125.5 36.5 124.7 28.5 121.5C20.5 118.3 21.5 114.833 23 113.5C33.5 119 42 111 48.5 115.5C51 112 51.5 109.714 56 111C59.5 112 61.5 119 66.5 119C71.5 119 73 116 74.5 108C76 100 78 101.5 81.5 101.5Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <path d="M116.5 109.5C117.7 115.5 115 121.333 113.5 123.5H90.5C92 121.833 95.2 117.7 96 114.5C96.8 111.3 95.6667 108.167 95 107C96.6 107 100 108 101.5 108.5L100.5 111.5C102.667 111.5 107.2 110.8 108 108C109 104.5 111 99 112.5 99C114 99 115 102 116.5 109.5Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <path d="M68 102.5C62.4 102.5 53 95.5 52 92.5C56.5 95 64.5 97.5 66.5 97.5C68.1 97.5 69.5 95.5 69.5 94.5C71 97.1667 73.6 102.5 68 102.5Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <path d="M101.5 95.5C94.7 95.5 88 90.8333 85.5 88.5L91 99C94 99 100.3 98.7 101.5 97.5C102.7 96.3 102 95.6667 101.5 95.5Z" 
-                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
+                    fill="${props.colors?. quarternary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.1'}" />
                 <ellipse cx="54.0173" cy="65" rx="2.5" ry="4" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <ellipse cx="48.6174" cy="71.584" rx="1.71278" ry="3.43883" transform="rotate(-22.2314 48.6174 71.584)" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <ellipse cx="47.8237" cy="63.4117" rx="1.71278" ry="1.90536" transform="rotate(-22.2314 47.8237 63.4117)" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <ellipse cx="53.4918" cy="86.2576" rx="2.95464" ry="3.43883" transform="rotate(20.5678 53.4918 86.2576)" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <ellipse cx="48.4918" cy="97.2576" rx="2.95464" ry="3.43883" transform="rotate(20.5678 48.4918 97.2576)" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <ellipse cx="47.5344" cy="104" rx="1.93695" ry="1.91913" transform="rotate(2.44453 47.5344 104)" 
-                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.4'}" />
+                    fill="${props.colors?. tertiary || '#000'}" fill-opacity="${props.colors?. secondary !== undefined ? '1' : '0.2'}" />
                 <path d="M65.1358 66.6581C65.3363 66.8463 65.6524 66.834 65.8626 66.6569C67.8873 64.9519 74.1819 62.2725 84.0056 62.0193C84.8372 61.9979 85.5134 61.3231 85.5086 60.4913C85.5038 59.6663 84.8301 58.9969 84.0057 59.0275C73.6759 59.4098 67.4213 63.6911 65.1161 65.9758C64.9241 66.1661 64.9387 66.4731 65.1358 66.6581Z" 
                     fill="${props.colors?. primary || '#000'}"/>
                 <path d="M69.5173 103.5C70.4035 103.5 71.1947 103.31 71.8233 102.858C72.4659 102.397 72.8293 101.741 72.9923 101.027C73.3001 99.6786 72.926 97.9896 72.3328 96.3477C71.1325 93.0254 68.7325 89.1085 66.8868 86.4974C66.8511 86.447 66.8035 86.4074 66.7477 86.3809C66.412 86.2218 66.0494 86.6348 66.2325 86.958C67.835 89.7868 69.4798 94.3368 70.4518 97.0273C71.0253 98.6146 71.2137 99.8318 71.0424 100.582C70.9658 100.918 70.8292 101.11 70.6567 101.234C70.4702 101.368 70.1311 101.5 69.5173 101.5C66.7805 101.5 63.4243 100.189 60.2506 98.437C57.7875 97.0775 55.5224 95.5026 53.8768 94.2212C53.2473 93.731 52.3156 93.9164 51.9503 94.6256C51.6866 95.1377 51.8082 95.7667 52.2741 96.1054C53.9975 97.3578 56.4648 98.6319 59.2841 100.188C62.5271 101.978 66.2542 103.5 69.5173 103.5Z" 
