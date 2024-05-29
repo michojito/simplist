@@ -6,12 +6,9 @@ const { useSyncedState } = widget
 
 // Imports
 import { ColorPalette } from './constants'
-import { EmptyPage } from './pages/main/EmptyPage'
 import { MainPage } from './pages/main/MainPage'
 import { ModalContainer } from './views/containers/ModalContainer'
-import { Window } from './views/containers/Window'
-import { Header } from './views/header/HeaderBase'
-import { IlluEmpty } from './views/illustrations/IlluEmpty'
+
 
 // Components
 
@@ -20,7 +17,7 @@ import { IlluEmpty } from './views/illustrations/IlluEmpty'
 function Main () {
 
   // State Machine
-  const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', false)
+  const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', true)
   const [mode, setMode] = useSyncedState('mode', {
     powerMode: false,
     editOpen: false,
@@ -54,7 +51,7 @@ function Main () {
   }
 
   return (
-    <ModalContainer color={{current: color, set: setColor}}>
+    <ModalContainer color={color}>
       <MainPage color={color}/>
     </ModalContainer>
   )

@@ -102,7 +102,7 @@ export class ColorPalette {
         this.background = {
             primary  : lightMode ? Colors.neutrals[0] : Colors.neutrals[900],
             secondary: this.neutrals.lowest,
-            modal    : lightMode ? Colors.neutrals[0] : this.neutrals.lower,
+            modal    : lightMode ? Colors.neutrals[0] : Colors.neutrals[800],
         }
         this.text = {
             primary  : lightMode ? Colors.neutrals[900] : Colors.neutrals[0],
