@@ -8,6 +8,7 @@ type Props = {
     padding?: WidgetJSX.Padding
     spacing?: number | WidgetJSX.LayoutGap
     width?: WidgetJSX.AutolayoutSize
+    fill?: string | WidgetJSX.Color | WidgetJSX.Paint | (WidgetJSX.SolidPaint | WidgetJSX.GradientPaint)[]
     stroke?: string | WidgetJSX.Color | WidgetJSX.SolidPaint | WidgetJSX.GradientPaint | (WidgetJSX.SolidPaint | WidgetJSX.GradientPaint)[]
     children?: FigmaDeclarativeNode
 }
@@ -39,7 +40,7 @@ export function Window (props: Props) {
                     showShadowBehindNode: false,
                 },
             ]}
-            fill='#FFF'
+            fill={props.fill}
             stroke={props.stroke || '#EFEFEF'}
             cornerRadius={CornerRadius.l}
             spacing={props.spacing || Spacing.m}
