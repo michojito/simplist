@@ -4,6 +4,7 @@
 const { widget } = figma
 const { useSyncedState } = widget
 
+import { ColorPalette } from './constants'
 // Imports
 //import { Colors } from './constants'
 import { shadeColor } from './utils'
@@ -27,7 +28,7 @@ function Main () {
 
   // Colors
   const [lightMode, setLightMode] = useSyncedState('lightMode', true)
-  const [color, setColor] = useSyncedState('color', {})
+  const [color, setColor] = useSyncedState('color', new ColorPalette(lightMode))
 
 
   // Open Setting View
@@ -50,7 +51,8 @@ function Main () {
   }
 
   return (
-    <Window>
+    <Window fill={color.background.primary} stroke={color.neutrals.lowest}>
+      {console.log(color)}
       <Header title='Todo'/>
       {
         // <Input>

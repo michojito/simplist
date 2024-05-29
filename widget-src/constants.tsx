@@ -32,12 +32,56 @@ const Colors = {
         800: '#71001D',
         900: '#3F000C',
     },
-    accent: '#0038FF',
+    accent: {
+        blue  : '#0038FF',
+        orange: '#FC4100',
+        yellow: '#FFC700',
+        green : '#41B06E',
+        purple: '#8F00FF',
+        red   : '#F21363',
+        gray  : '#6B6B6B',
+        black : '#000000',
+    },
+
 }
 
-export const ColorPalette = (lightMode:boolean) => {
-    return {
-        neutrals: {
+export class ColorPalette {
+
+    neutrals: {
+        lowest : string,
+        lower  : string,
+        low    : string,
+        medium : string,
+        high   : string,
+        higher : string,
+        highest: string,
+    } 
+    danger: {
+        lowest : string,
+        lower  : string,
+        low    : string,
+        medium : string,
+        high   : string,
+        higher : string,
+        highest: string,
+    }
+    background: {
+        primary  : string,
+        secondary: string,
+        modal    : string,
+    }
+    text: {
+        primary  : string,
+        secondary: string,
+        accent   : string,
+    }
+    accent: {
+        medium: string,
+        high  : string,
+    }
+
+    constructor (lightMode: boolean) {
+        this.neutrals = {
             lowest : lightMode ? Colors.neutrals[100] : Colors.neutrals[800],
             lower  : lightMode ? Colors.neutrals[200] : Colors.neutrals[700],
             low    : lightMode ? Colors.neutrals[300] : Colors.neutrals[600],
@@ -45,8 +89,8 @@ export const ColorPalette = (lightMode:boolean) => {
             high   : lightMode ? Colors.neutrals[700] : Colors.neutrals[300],
             higher : lightMode ? Colors.neutrals[800] : Colors.neutrals[200],
             highest: lightMode ? Colors.neutrals[900] : Colors.neutrals[100],
-        },
-        danger: {
+        }
+        this.danger = {
             lowest : lightMode ? Colors.red[100] : Colors.red[800],
             lower  : lightMode ? Colors.red[200] : Colors.red[700],
             low    : lightMode ? Colors.red[300] : Colors.red[600],
@@ -54,13 +98,22 @@ export const ColorPalette = (lightMode:boolean) => {
             high   : lightMode ? Colors.red[700] : Colors.red[300],
             higher : lightMode ? Colors.red[800] : Colors.red[200],
             highest: lightMode ? Colors.red[900] : Colors.red[100],
-        },
-        accent: {
-            medium : lightMode ? Colors.accent : shadeColor(Colors.accent, 20),
-            high : lightMode ? shadeColor(Colors.accent, -20) : Colors.accent
-        },
-
-      }
+        }
+        this.background = {
+            primary  : lightMode ? Colors.neutrals[0] : Colors.neutrals[900],
+            secondary: this.neutrals.lowest,
+            modal    : lightMode ? Colors.neutrals[0] : this.neutrals.lower,
+        }
+        this.text = {
+            primary  : lightMode ? Colors.neutrals[900] : Colors.neutrals[0],
+            secondary: lightMode ? Colors.neutrals[500] : Colors.neutrals[400],
+            accent   : lightMode ? Colors.neutrals[0] : Colors.neutrals[0],
+        }
+        this.accent = {
+            medium: lightMode ? Colors.accent.blue : shadeColor(Colors.accent.blue, -20),
+            high  : lightMode ? shadeColor(Colors.accent.blue, 20) : Colors.accent.blue,
+        }
+    }
 }
 
 
