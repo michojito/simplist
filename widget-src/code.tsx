@@ -8,6 +8,7 @@ const { useSyncedState } = widget
 import { ColorPalette } from './constants'
 import { EmptyPage } from './pages/main/EmptyPage'
 import { MainPage } from './pages/main/MainPage'
+import { ModalContainer } from './views/containers/ModalContainer'
 import { Window } from './views/containers/Window'
 import { Header } from './views/header/HeaderBase'
 import { IlluEmpty } from './views/illustrations/IlluEmpty'
@@ -25,6 +26,7 @@ function Main () {
     editOpen: false,
     settingOpen: false,
     infoOpen: false,
+    menuOpen: false,
   })
 
   // Colors
@@ -52,7 +54,9 @@ function Main () {
   }
 
   return (
-    <MainPage color={color}/>
+    <ModalContainer color={{current: color, set: setColor}}>
+      <MainPage color={color}/>
+    </ModalContainer>
   )
 
   

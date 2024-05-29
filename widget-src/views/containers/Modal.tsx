@@ -1,14 +1,24 @@
-import { CornerRadius, Spacing } from "../../constants"
-
 const { widget } = figma
 const {AutoLayout} = widget
 
+// Imports
+import { CornerRadius, Spacing } from "../../constants"
+
 type Props = {
     name?: string
+
+    // Styling
     padding?: WidgetJSX.Padding
     spacing?: number | WidgetJSX.LayoutGap
     width?: WidgetJSX.AutolayoutSize
+    fill?: string | WidgetJSX.Color | WidgetJSX.Paint | (WidgetJSX.SolidPaint | WidgetJSX.GradientPaint)[]
     stroke?: string | WidgetJSX.Color | WidgetJSX.SolidPaint | WidgetJSX.GradientPaint | (WidgetJSX.SolidPaint | WidgetJSX.GradientPaint)[]
+
+    // Positionning
+    position?: "auto" | "absolute"
+    y?: number | WidgetJSX.VerticalConstraint
+    x?: number | WidgetJSX.HorizontalConstraint
+
     children?: FigmaDeclarativeNode
 }
 
@@ -39,7 +49,7 @@ export function Modal (props: Props) {
                     showShadowBehindNode: false,
                 },
             ]}
-            fill='#FFF'
+            fill={props.fill || '#FFF'}
             stroke={props.stroke || '#EFEFEF'}
             cornerRadius={CornerRadius.l}
             spacing={props.spacing || Spacing.m}
@@ -48,6 +58,10 @@ export function Modal (props: Props) {
             minHeight={24}
             verticalAlignItems='center'
             horizontalAlignItems='center'
+
+            positioning={props.position}
+            y={props.y}
+            x={props.x}
         >
             {props.children}
         </AutoLayout>
