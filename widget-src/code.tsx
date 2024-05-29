@@ -4,10 +4,8 @@
 const { widget } = figma
 const { useSyncedState } = widget
 
-import { ColorPalette } from './constants'
 // Imports
-//import { Colors } from './constants'
-import { shadeColor } from './utils'
+import { ColorPalette } from './constants'
 import { Window } from './views/containers/Window'
 import { Header } from './views/header/HeaderBase'
 
@@ -53,7 +51,7 @@ function Main () {
   return (
     <Window fill={color.background.primary} stroke={color.neutrals.lowest}>
       {console.log(color)}
-      <Header title='Todo'/>
+      <Header title='Todo' colors={color}/>
       {
         // <Input>
         // Main Content -> Empty | List
