@@ -56,6 +56,7 @@ export function Modal (props: Props) {
             padding={props.padding || Spacing.l}
             width={props.width || 250}
             minHeight={24}
+            direction='vertical'
             verticalAlignItems='center'
             horizontalAlignItems='center'
 
