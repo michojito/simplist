@@ -12,7 +12,6 @@ import { ModalContainer } from './views/containers/ModalContainer'
 
 // Components
 
-
 /* Main function that handle the whole Widget */
 function Main () {
 
@@ -51,8 +50,8 @@ function Main () {
   }
 
   return (
-    <ModalContainer color={color}>
-      <MainPage color={color}/>
+    <ModalContainer color={color} mode={{state:mode, set:setMode}}>
+      <MainPage color={color} mode={{state:mode, set:setMode}}/>
     </ModalContainer>
   )
 

@@ -24,8 +24,6 @@ type Props = {
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
 export function GhostButton (props: Props) {
-    console.log(`height: ${props.height}`)
-    console.log(`textColor: ${props.textColor}`)
     
     return (
         <AutoLayout
@@ -40,7 +38,7 @@ export function GhostButton (props: Props) {
             verticalAlignItems='center'
             onClick={props.onClick}
             hoverStyle={{
-                fill: props.fill != undefined ? shadeColor(props.fill, -20) : props.color?.neutrals.lowest
+                fill: (props.fill !== undefined ? shadeColor(props.fill, -20) : props.color?.neutrals.lowest)
             }}
         >
             { props.leadingIcon !== undefined && (

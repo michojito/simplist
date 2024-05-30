@@ -31,22 +31,26 @@ export function MenuModal (props:Props) {
                 color={props.color}
                 icon='checklist'
                 content="Edit"
+                onClick={() => { console.log('click')}}
             />
             <MenuItem 
                 color={props.color}
                 icon='eye.cross'
                 content="Hide Completed"
+                onClick={() => { console.log('click')}}
             />
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
                 color={props.color}
                 icon='info.circle'
                 content="Infos"
+                onClick={() => { console.log('click')}}
             />
             <MenuItem 
                 color={props.color}
                 icon='slider'
                 content="Settings"
+                onClick={() => { console.log('click')}}
             />
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
@@ -54,6 +58,7 @@ export function MenuModal (props:Props) {
                 icon='trash'
                 content="Clear all"
                 danger
+                onClick={() => { console.log('click')}}
             />
         </Modal>
     )

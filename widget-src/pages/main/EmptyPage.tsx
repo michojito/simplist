@@ -13,12 +13,14 @@ import { IlluEmpty } from "../../views/illustrations/IlluEmpty";
 
 type Props = {
     color: ColorPalette
+
+    onMenu?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
 
 export function EmptyPage (props: Props) {
     return (
         <Window fill={props.color.background.primary} stroke={props.color.neutrals.lowest}>
-            <Header title='Todo' colors={props.color}/>
+            <Header title='Todo' color={props.color} onClick={props.onMenu}/>
 
             <AutoLayout
                 name='Content'
