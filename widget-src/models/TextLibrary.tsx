@@ -3,5 +3,9 @@ export const TextLibrary = {
         title: 'Oops, nothing here!',
         description: 'Start by typing something to add a new task!',
     },
-    inputPlaceholder: 'Add a new task'
+    inputPlaceholder: 'Add a new task',
+    button: {
+        info: 'Done'
+    }
+
 }

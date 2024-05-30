@@ -4,10 +4,13 @@ const {AutoLayout, Text, Line} = widget
 // Imports
 import {ColorPalette, Font, Spacing } from "../../constants"
 import { Icon } from "../Icon"
+import { Button } from "../controls/buttons/Button"
 
 type Props = {
     title: string
-    colors: ColorPalette
+    color: ColorPalette
+
+    onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
 
 export function Header (props: Props) {
@@ -25,10 +28,10 @@ export function Header (props: Props) {
                 verticalAlignItems='center'
                 width='fill-parent'
             >
-                <Icon svg='logo' name='Logo' fill={props.colors.accent.medium} size={'large'}/>
+                <Icon svg='logo' name='Logo' fill={props.color.accent.medium} size={'large'}/>
                 <Text 
                     name='Title'
-                    fill={props.colors.text.primary}
+                    fill={props.color.text.primary}
                     width='fill-parent'
                     fontFamily={Font.family}
                     fontSize={Font.heading.bolder.size}
@@ -36,8 +39,9 @@ export function Header (props: Props) {
                 >
                     {props.title}
                 </Text>
+                <Button type='ghost' leadingIcon='ellipsis' textColor={props.color.text.primary} color={props.color} onClick={props.onClick}/>
             </AutoLayout>
-            <Line name='Separator' stroke={props.colors.neutrals.lowest} length='fill-parent' />
+            <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
         </AutoLayout>
     )
 }
