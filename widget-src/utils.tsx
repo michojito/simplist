@@ -1,3 +1,5 @@
+const { widget, showUI, closePlugin } = figma
+
 /**
  * Shade a given color.
  * @param color The hexcode to the color

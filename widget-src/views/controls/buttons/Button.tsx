@@ -5,6 +5,7 @@ const {AutoLayout} = widget
 import { ColorPalette } from "../../../constants"
 import { IconName } from "../../../models/IconLibrary"
 import { GhostButton } from "./GhostButton"
+import { MiniGhostButton } from "./MiniGhostButton"
 import { PrimaryButton } from "./PrimaryButton"
 
 type Props = {
@@ -55,6 +56,19 @@ export function Button (props: Props) {
                 /> 
             )
         case 'mini-ghost':
+            return ( 
+                <MiniGhostButton
+                    leadingIcon={props.leadingIcon}
+                    trailingIcon={props.trailingIcon}
+                    content={props.content}
+                    color={props.color}
+                    fill={props.fill}
+                    textColor={props.textColor}
+                    width={props.width}
+                    height={props.height}
+                    onClick={props.onClick}
+                /> 
+            )
             
     }
     

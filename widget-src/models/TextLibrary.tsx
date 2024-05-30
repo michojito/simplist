@@ -5,7 +5,9 @@ export const TextLibrary = {
     },
     inputPlaceholder: 'Add a new task',
     button: {
-        info: 'Done'
+        info: 'Done',
+        powerCancel: 'Cancel',
+        powerSave: 'Save',
     }
 
 }

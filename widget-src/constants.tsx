@@ -5,6 +5,10 @@ export const App = {
     version: '2.0',
     name: 'SimpList',
     dev: true,
+    url: {
+        github: 'https://github.com/MrMichelr/',
+        website: 'https://www.mr-michel.com'
+    },
 }
 
 const Colors = {

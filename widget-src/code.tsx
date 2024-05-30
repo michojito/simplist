@@ -2,11 +2,13 @@
 // Simplist is a simple To Do List for Figma and Figjam
 
 const { widget } = figma
-const { useSyncedState } = widget
+const { useSyncedState, usePropertyMenu } = widget
 
 // Imports
 import { ColorPalette } from './constants'
+import { iconLibrary } from './models/IconLibrary'
 import { MainPage } from './pages/main/MainPage'
+import { PowerModePage } from './pages/powerMode/PowerModePage'
 import { ModalContainer } from './views/containers/ModalContainer'
 
 
@@ -45,9 +47,30 @@ function Main () {
   // Open PowerMode View
   if (mode.powerMode) {
     return (
-      <></>
+      <PowerModePage color={color} mode={{state:mode, set:setMode}}/>
     )
   }
+
+  usePropertyMenu(
+    [
+      {
+        itemType:'action',
+        icon: iconLibrary('bolt', '#FFF'),
+        tooltip: 'PowerMode',
+        propertyName: 'powerMode',
+      }
+    ], ({propertyName}) => {
+      if (propertyName === 'powerMode') {
+        setMode({
+          powerMode: !mode.powerMode,
+          editOpen: mode.editOpen,
+          settingOpen: mode.settingOpen,
+          infoOpen: mode.infoOpen,
+          menuOpen: mode.menuOpen,
+        })
+      }
+    }
+  )
 
   return (
     <ModalContainer color={color} mode={{state:mode, set:setMode}}>

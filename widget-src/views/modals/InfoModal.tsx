@@ -1,5 +1,5 @@
 const { widget } = figma
-const {AutoLayout, Text} = widget
+const {AutoLayout, Text, useEffect, waitForTask} = widget
 
 // Imports
 import { App, ColorPalette, CornerRadius, Font, Spacing } from "../../constants";
@@ -20,6 +20,8 @@ type Props = {
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
 export function InfoModal (props:Props) {
+    
+    var url: string = ''
 
     return(
         <Modal
@@ -38,8 +40,10 @@ export function InfoModal (props:Props) {
                 verticalAlignItems='center'
                 spacing={Spacing.xs}
             >
-                <Button type='ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='globe' />
-                <Button type='ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='logo.github' />
+                <Button type='mini-ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='globe' 
+                onClick={() => {App.url.website}} />
+                <Button type='mini-ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='logo.github'
+                onClick={() => {App.url.github}} />
             </AutoLayout>
 
             <AutoLayout
