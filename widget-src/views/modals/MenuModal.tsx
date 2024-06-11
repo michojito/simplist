@@ -14,6 +14,15 @@ type Props = {
     
     // Styling
     color: ColorPalette
+
+    //Function
+    onClick?: {
+        Edit?: ((event: WidgetClickEvent) => void | Promise<any>),
+        HideCompleted?: ((event: WidgetClickEvent) => void | Promise<any>),
+        Infos?: ((event: WidgetClickEvent) => void | Promise<any>),
+        Settings?: ((event: WidgetClickEvent) => void | Promise<any>),
+        ClearAll?: ((event: WidgetClickEvent) => void | Promise<any>),
+    }
 }
 export function MenuModal (props:Props) {
 
@@ -31,26 +40,26 @@ export function MenuModal (props:Props) {
                 color={props.color}
                 icon='checklist'
                 content="Edit"
-                onClick={() => { console.log('click')}}
+                onClick={props.onClick?.Edit}
             />
             <MenuItem 
                 color={props.color}
                 icon='eye.cross'
                 content="Hide Completed"
-                onClick={() => { console.log('click')}}
+                onClick={props.onClick?.HideCompleted}
             />
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
                 color={props.color}
                 icon='info.circle'
                 content="Infos"
-                onClick={() => { console.log('click')}}
+                onClick={props.onClick?.Infos}
             />
             <MenuItem 
                 color={props.color}
                 icon='slider'
                 content="Settings"
-                onClick={() => { console.log('click')}}
+                onClick={props.onClick?.Settings}
             />
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
@@ -58,7 +67,7 @@ export function MenuModal (props:Props) {
                 icon='trash'
                 content="Clear all"
                 danger
-                onClick={() => { console.log('click')}}
+                onClick={props.onClick?.ClearAll}
             />
         </Modal>
     )
