@@ -49,6 +49,15 @@ export function ModalContainer (props: Props) {
                 <MenuModal position='absolute'
                     x={{ type:'right', offset: -202 }} y={64}
                     color={props.color}
+                    onClick={{
+                        Infos:() => {props.mode.set({
+                            powerMode: props.mode.state.powerMode,
+                            editOpen: props.mode.state.editOpen,
+                            settingOpen: props.mode.state.settingOpen,
+                            infoOpen: !props.mode.state.infoOpen,
+                            menuOpen: !props.mode.state.menuOpen
+                        })}
+                    }}
                 />
             }
             

@@ -56,7 +56,7 @@ function Main () {
       {
         itemType:'action',
         icon: iconLibrary('bolt', '#FFF'),
-        tooltip: 'PowerMode',
+        tooltip: 'Power Mode',
         propertyName: 'powerMode',
       }
     ], ({propertyName}) => {
