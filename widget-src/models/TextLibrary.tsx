@@ -10,5 +10,9 @@ export const TextLibrary = {
         powerCancel: 'Cancel',
         powerSave: 'Save',
     },
+    settings: {
+        appearance: 'Appearance',
+        accentColor: 'Accent color'
+    }
 
 }

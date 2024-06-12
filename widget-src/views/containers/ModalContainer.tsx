@@ -64,6 +64,13 @@ export function ModalContainer (props: Props) {
                             infoOpen: props.mode.state.infoOpen,
                             menuOpen: !props.mode.state.menuOpen
                         })},
+                        Settings:() => {props.mode.set({
+                            powerMode: props.mode.state.powerMode,
+                            editOpen: props.mode.state.editOpen,
+                            settingOpen: !props.mode.state.settingOpen,
+                            infoOpen: props.mode.state.infoOpen,
+                            menuOpen: !props.mode.state.menuOpen
+                        })},
                     }}
                 />
             }
