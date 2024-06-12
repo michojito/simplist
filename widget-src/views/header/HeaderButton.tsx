@@ -3,6 +3,7 @@ const {AutoLayout, Text, Line} = widget
 
 // Imports
 import {ColorPalette, Font, Spacing } from "../../constants"
+import { TextLibrary } from "../../models/TextLibrary"
 import { Icon } from "../Icon"
 import { Button } from "../controls/buttons/Button"
 
@@ -39,7 +40,7 @@ export function HeaderButton (props: Props) {
                 >
                     {props.title}
                 </Text>
-                <Button type='ghost' content='done' textColor={props.color.accent.medium} color={props.color} onClick={props.onClick}/>
+                <Button type='ghost' content={TextLibrary.button.info} textColor={props.color.accent.medium} color={props.color} onClick={props.onClick}/>
             </AutoLayout>
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
         </AutoLayout>
