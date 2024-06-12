@@ -7,6 +7,7 @@ const { useSyncedState, usePropertyMenu } = widget
 // Imports
 import { ColorPalette } from './constants'
 import { iconLibrary } from './models/IconLibrary'
+import { EditPage } from './pages/edit/EditPage'
 import { MainPage } from './pages/main/MainPage'
 import { PowerModePage } from './pages/powerMode/PowerModePage'
 import { ModalContainer } from './views/containers/ModalContainer'
@@ -41,7 +42,12 @@ function Main () {
   // Open Edit View
   if (mode.editOpen) {
     return (
-      <></>
+      <EditPage color={color} onMenu={() => {setMode( {
+        powerMode: mode.powerMode,
+        editOpen: !mode.editOpen,
+        settingOpen: mode.settingOpen,
+        infoOpen: mode.infoOpen,
+        menuOpen: mode.menuOpen})}} />
     )
   }
   // Open PowerMode View
