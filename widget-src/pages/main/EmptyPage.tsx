@@ -7,6 +7,7 @@ import { TextLibrary } from "../../models/TextLibrary";
 
 // Views
 import { Window } from "../../views/containers/Window";
+import { TextField } from "../../views/controls/inputs/TextField";
 import { Header } from "../../views/header/HeaderBase";
 import { IlluEmpty } from "../../views/illustrations/IlluEmpty";
 
@@ -29,8 +30,7 @@ export function EmptyPage (props: Props) {
                 width='fill-parent'
                 horizontalAlignItems='center'
             >
-                { // Input 
-                }
+                <TextField color={props.color} type='default' />
                 <AutoLayout
                     name='Container'
                     spacing={Spacing.m}
