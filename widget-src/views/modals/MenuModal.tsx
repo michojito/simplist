@@ -14,6 +14,7 @@ type Props = {
     
     // Styling
     color: ColorPalette
+    isHideCompleted: Boolean
 
     //Function
     onClick?: {
@@ -45,7 +46,7 @@ export function MenuModal (props:Props) {
             <MenuItem 
                 color={props.color}
                 icon='eye.cross'
-                content="Hide Completed"
+                content={props.isHideCompleted ? "Show Completed" : "Hide Completed"}
                 onClick={props.onClick?.HideCompleted}
             />
             <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />

@@ -11,6 +11,7 @@ type Props = {
     // Styling
     color?: ColorPalette
     content: string
+    onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 
 }
 export function CheckedTask (props: Props) {
@@ -44,6 +45,7 @@ export function CheckedTask (props: Props) {
                     hoverStyle={{
                         fill: props.color?.background.primary,
                     }}
+                    onClick={props.onClick}
                 >
                     <Icon 
                         name="Checkmark" 

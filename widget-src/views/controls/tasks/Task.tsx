@@ -6,28 +6,24 @@ import { EditTask } from "./EditTask"
 
 type Props = {
     type: 'default' | 'checked' | 'edit'
-
-    // Styling
     color?: ColorPalette
-
+    content: string
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
-export function TextField (props: Props) {
 
+export function TaskItem (props: Props) {
     switch (props.type) {
         case 'default':
             return (
-                <DefaultTask color={props.color} content="Test"/>
+                <DefaultTask color={props.color} content={props.content} onClick={props.onClick}/>
             )
-
         case 'checked':
             return (
-                <CheckedTask color={props.color} content="Test"/>
+                <CheckedTask color={props.color} content={props.content} onClick={props.onClick}/>
             )
-
         case 'edit':
             return (
-                <EditTask color={props.color} content="Test"/>
+                <EditTask color={props.color} content={props.content}/>
             )
     }
 }
