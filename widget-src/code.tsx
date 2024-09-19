@@ -63,7 +63,9 @@ function Main () {
         editOpen: !mode.editOpen,
         settingOpen: mode.settingOpen,
         infoOpen: mode.infoOpen,
-        menuOpen: mode.menuOpen})}} />
+        menuOpen: mode.menuOpen})}} 
+        tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}
+        />
     )
   }
   // Open PowerMode View
@@ -95,7 +97,7 @@ function Main () {
   )
 
   return (
-    <ModalContainer color={color} mode={{state:mode, set:setMode}} isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}>
+    <ModalContainer color={color} mode={{state:mode, set:setMode}} setTask={setTasks} isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}>
       <MainPage color={color} mode={{state:mode, set:setMode}} tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}/>
     </ModalContainer>
   )

@@ -15,15 +15,15 @@ export function TaskItem (props: Props) {
     switch (props.type) {
         case 'default':
             return (
-                <DefaultTask color={props.color} content={props.content} onClick={props.onClick}/>
+                <DefaultTask key={`default-${props.content}`} color={props.color} content={props.content} onClick={props.onClick}/>
             )
         case 'checked':
             return (
-                <CheckedTask color={props.color} content={props.content} onClick={props.onClick}/>
+                <CheckedTask key={`checked-${props.content}`} color={props.color} content={props.content} onClick={props.onClick}/>
             )
         case 'edit':
             return (
-                <EditTask color={props.color} content={props.content}/>
+                <EditTask key={`edit-${props.content}`} color={props.color} content={props.content} onClick={props.onClick}/>
             )
     }
 }
