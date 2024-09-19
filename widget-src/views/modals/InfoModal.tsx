@@ -1,5 +1,5 @@
 const { widget } = figma
-const {AutoLayout, Text, useEffect, waitForTask} = widget
+const { AutoLayout, Text, useEffect, waitForTask } = widget
 
 // Imports
 import { App, ColorPalette, CornerRadius, Font, Spacing } from "../../constants";
@@ -19,9 +19,19 @@ type Props = {
     color: ColorPalette
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
+
 export function InfoModal (props:Props) {
     
-    var url: string = ''
+    const openUrl = (url: string) => {
+        return new Promise((resolve) => {
+            figma.showUI(__html__, { visible: false })
+            figma.ui.postMessage({ type: 'open-url', url })
+            figma.ui.onmessage = () => {
+                figma.closePlugin()
+                resolve(null)
+            }
+        })
+    }
 
     return(
         <Modal
@@ -40,10 +50,20 @@ export function InfoModal (props:Props) {
                 verticalAlignItems='center'
                 spacing={Spacing.xs}
             >
-                <Button type='mini-ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='globe' 
-                onClick={() => {App.url.website}} />
-                <Button type='mini-ghost' color={props.color} textColor={props.color.text.secondary} leadingIcon='logo.github'
-                onClick={() => {App.url.github}} />
+                <Button 
+                    type='mini-ghost' 
+                    color={props.color} 
+                    textColor={props.color.text.secondary} 
+                    leadingIcon='globe' 
+                    onClick={() => waitForTask(openUrl(App.url.website))}
+                />
+                <Button 
+                    type='mini-ghost' 
+                    color={props.color} 
+                    textColor={props.color.text.secondary} 
+                    leadingIcon='logo.github'
+                    onClick={() => waitForTask(openUrl(App.url.github))}
+                />
             </AutoLayout>
 
             <AutoLayout

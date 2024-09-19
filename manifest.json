@@ -3,6 +3,7 @@
   "id": "1370783213790545682",
   "api": "1.0.0",
   "main": "dist/code.js",
+  "ui": "widget-src/pages/ui.html",
   "capabilities": [],
   "enableProposedApi": false,
   "documentAccess": "dynamic-page",
