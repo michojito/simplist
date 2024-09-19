@@ -11,6 +11,7 @@ type Props = {
     // Styling
     color?: ColorPalette
     content: string
+    onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 
 }
 export function EditTask (props: Props) {
@@ -44,10 +45,11 @@ export function EditTask (props: Props) {
                     hoverStyle={{
                         fill: props.color?.danger.lowest,
                     }}
+                    onClick={props.onClick}
                 >
                     <Icon 
                         name="Trash" 
-                        size='medium' 
+                        size='small' 
                         fill={props.color?.danger.medium} 
                         svg='trash'
                     />

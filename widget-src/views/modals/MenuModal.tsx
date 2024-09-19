@@ -38,32 +38,37 @@ export function MenuModal (props:Props) {
             padding={Spacing.s}
         >
             <MenuItem 
+                key="edit"
                 color={props.color}
                 icon='checklist'
                 content="Edit"
                 onClick={props.onClick?.Edit}
             />
             <MenuItem 
+                key="hideCompleted"
                 color={props.color}
                 icon='eye.cross'
                 content={props.isHideCompleted ? "Show Completed" : "Hide Completed"}
                 onClick={props.onClick?.HideCompleted}
             />
-            <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
+            <Line key="separator1" name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
+                key="info"
                 color={props.color}
                 icon='info.circle'
                 content="Infos"
                 onClick={props.onClick?.Infos}
             />
             <MenuItem 
+                key="settings"
                 color={props.color}
                 icon='slider'
                 content="Settings"
                 onClick={props.onClick?.Settings}
             />
-            <Line name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
+            <Line key="separator2" name='Separator' stroke={props.color.neutrals.lowest} length='fill-parent' />
             <MenuItem 
+                key="clearAll"
                 color={props.color}
                 icon='trash'
                 content="Clear all"

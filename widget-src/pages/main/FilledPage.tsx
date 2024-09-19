@@ -48,6 +48,7 @@ export function FilledPage(props: Props) {
                         if (props.isHideCompleted && !task.checked) {
                             return (
                                 <AutoLayout
+                                    key={task.UUID}
                                     name='Item'
                                     spacing={Spacing.s}
                                     width='fill-parent'
@@ -55,18 +56,19 @@ export function FilledPage(props: Props) {
                                     verticalAlignItems='center'
                                 >
                                     <TaskItem
-                                        key={task.UUID}
+                                        key={`task-${task.UUID}`}
                                         type={task.checked ? 'checked' : 'default'}
                                         color={props.color}
                                         content={task.content}
                                         onClick={() => props.handleCheckTask(task.UUID)}
                                     />
-                                    <Separator color={props.color} />
+                                    <Separator key={`separator-${task.UUID}`} color={props.color} />
                                 </AutoLayout>
                             )
                         } else if (!props.isHideCompleted) {
                             return (
                                 <AutoLayout
+                                    key={task.UUID}
                                     name='Item'
                                     spacing={Spacing.s}
                                     width='fill-parent'
@@ -74,13 +76,13 @@ export function FilledPage(props: Props) {
                                     verticalAlignItems='center'
                                 >
                                     <TaskItem
-                                        key={task.UUID}
+                                        key={`task-${task.UUID}`}
                                         type={task.checked ? 'checked' : 'default'}
                                         color={props.color}
                                         content={task.content}
                                         onClick={() => props.handleCheckTask(task.UUID)}
                                     />
-                                    <Separator color={props.color} />
+                                    <Separator key={`separator-${task.UUID}`} color={props.color} />
                                 </AutoLayout>
                             )
                         }

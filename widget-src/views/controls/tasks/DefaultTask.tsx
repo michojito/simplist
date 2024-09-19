@@ -65,6 +65,7 @@ export function DefaultTask (props: Props) {
                         {props.content}
                     </Text>
                 </AutoLayout>
+            
             </AutoLayout>
         </AutoLayout>
     )
