@@ -11,15 +11,28 @@ type Props = {
     // Styling
     color?: ColorPalette
 
+    onAddTask: (taskContent: string) => void
+
 }
 export function DefaultTextField (props: Props) {
     const [text, setText] = useSyncedState("text", "")
     const [err, setErr] = useSyncedState("input Err", false)
 
+    const handleAddTask = () => {
+        const trimmedText = text.trim();
+        if (trimmedText !== "") {
+            props.onAddTask?.(trimmedText);
+            setText("");
+            setErr(false);
+        } else {
+            setErr(true);
+        }
+    }
+
     return (
         <AutoLayout
             name='TextField'
-            direction='horizontal'
+            direction='vertical'
             spacing={Spacing.xs}
             width='fill-parent'
         >
@@ -38,9 +51,9 @@ export function DefaultTextField (props: Props) {
                     fontSize={Font.body.medium.size}
                     fontWeight={Font.body.medium.weight}
                     lineHeight={Font.body.medium.lineHeight}
-                    onTextEditEnd={ (e) => {
-                        setErr(false);
+                    onTextEditEnd={(e) => {
                         setText(e.characters);
+                        setErr(false);
                     }}
                     placeholderProps={{
                         fill: err ? props.color?.danger.medium : props.color?.text.secondary,
@@ -57,7 +70,12 @@ export function DefaultTextField (props: Props) {
                         }
                     }}
                 />
-                <Button type='primary' leadingIcon='plus' color={props.color}/>
+                <Button 
+                    type='primary' 
+                    leadingIcon='plus' 
+                    color={props.color}
+                    onClick={handleAddTask}
+                />
             </AutoLayout>
             {err && (
                 <Text 

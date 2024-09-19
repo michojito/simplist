@@ -6,12 +6,12 @@ import { CornerRadius, Spacing, Font } from "../../../constants"
 import { ColorPalette } from "../../../constants"
 
 type Props = {
-
     // Styling
     color?: ColorPalette
     content: string
-
+    onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 }
+
 export function DefaultTask (props: Props) {
     return (
         <AutoLayout
@@ -44,6 +44,7 @@ export function DefaultTask (props: Props) {
                         fill: props.color?.background.secondary,
                         stroke: props.color?.accent.high
                     }}
+                    onClick={props.onClick}
                 />
 
                 <AutoLayout

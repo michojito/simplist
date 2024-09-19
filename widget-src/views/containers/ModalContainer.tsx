@@ -10,6 +10,9 @@ type Props = {
     color: ColorPalette
     children?: FigmaDeclarativeNode
 
+    isHideCompleted: Boolean
+    setHideCompleted: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
     mode: {
         state: {
             powerMode: boolean;
@@ -49,6 +52,7 @@ export function ModalContainer (props: Props) {
                 <MenuModal position='absolute'
                     x={{ type:'right', offset: -202 }} y={64}
                     color={props.color}
+                    isHideCompleted={props.isHideCompleted}
                     onClick={{
                         Infos:() => {props.mode.set({
                             powerMode: props.mode.state.powerMode,
@@ -71,6 +75,11 @@ export function ModalContainer (props: Props) {
                             infoOpen: props.mode.state.infoOpen,
                             menuOpen: !props.mode.state.menuOpen
                         })},
+                        HideCompleted: () => {
+                            console.log(`Hide : ${props.isHideCompleted}`)
+                            props.setHideCompleted(!props.isHideCompleted)
+                            console.log(`Hide After: ${props.isHideCompleted}`)
+                        }
                     }}
                 />
             }

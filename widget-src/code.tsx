@@ -32,9 +32,9 @@ function Main () {
   // Colors
   const [lightMode, setLightMode] = useSyncedState('lightMode', true)
   const [color, setColor] = useSyncedState('color', new ColorPalette(lightMode))
-
+  // Tasks
+  const [tasks, setTasks] = useSyncedState("tasks", [] as Task[]);
   
-
 
   // Open Setting View
   if (mode.settingOpen) {
@@ -95,8 +95,8 @@ function Main () {
   )
 
   return (
-    <ModalContainer color={color} mode={{state:mode, set:setMode}}>
-      <MainPage color={color} mode={{state:mode, set:setMode}}/>
+    <ModalContainer color={color} mode={{state:mode, set:setMode}} isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}>
+      <MainPage color={color} mode={{state:mode, set:setMode}} tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}/>
     </ModalContainer>
   )
 

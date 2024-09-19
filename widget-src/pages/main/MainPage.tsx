@@ -1,8 +1,21 @@
 import { ColorPalette } from "../../constants";
 import { EmptyPage } from "./EmptyPage";
+import { FilledPage } from "./FilledPage";
+
+type TaskType = {
+    UUID: number;
+    content: string;
+    checked: boolean;
+    subtasks: TaskType[];
+};
 
 type Props = {
     color: ColorPalette
+
+    tasks: TaskType[]
+    setTask: (newValue: TaskType[] | ((currValue: TaskType[]) => TaskType[])) => void
+
+    isHideCompleted: Boolean
 
     mode: {
         state: {
@@ -33,14 +46,54 @@ type Props = {
         })) => void
     }
 }
+
 export function MainPage (props: Props) {
+
+    const handleAddTask = (taskContent: string) => {
+        const newTask = {
+            UUID: Date.now(),
+            content: taskContent,
+            checked: false,
+            subtasks: []
+        };
+        props.setTask(prevTasks => [...prevTasks, newTask]);
+    }
+    const handleCheckTask = (taskUUID: number) => {
+        props.setTask(prevTasks => 
+            prevTasks.map(task => 
+                task.UUID === taskUUID ? { ...task, checked: !task.checked } : task
+            )
+        );
+    }
     
-    return (
-        <EmptyPage color={props.color} onMenu={() => {props.mode.set( {
-            powerMode: props.mode.state.powerMode,
-            editOpen: props.mode.state.editOpen,
-            settingOpen: props.mode.state.settingOpen,
-            infoOpen: props.mode.state.infoOpen,
-            menuOpen: !props.mode.state.menuOpen})}}/>
-    )
+    if (props.tasks.length === 0) {
+        return (
+            <EmptyPage 
+                color={props.color} 
+                onMenu={() => {
+                    props.mode.set({
+                        ...props.mode.state,
+                        menuOpen: !props.mode.state.menuOpen
+                    })
+                }}
+                handleAddTask={handleAddTask}
+            />
+        )
+    } else {
+        return (
+            <FilledPage 
+                color={props.color}
+                onMenu={() => {
+                    props.mode.set({
+                        ...props.mode.state,
+                        menuOpen: !props.mode.state.menuOpen
+                    })
+                }}
+                tasks={props.tasks}
+                handleAddTask={handleAddTask}
+                handleCheckTask={handleCheckTask}
+                isHideCompleted={props.isHideCompleted}
+            />
+        )
+    }
 }

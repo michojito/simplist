@@ -16,6 +16,8 @@ type Props = {
     color: ColorPalette
 
     onMenu?: ((event: WidgetClickEvent) => void | Promise<any>)
+
+    handleAddTask: (taskContent: string) => void
 }
 
 export function EmptyPage (props: Props) {
@@ -30,7 +32,7 @@ export function EmptyPage (props: Props) {
                 width='fill-parent'
                 horizontalAlignItems='center'
             >
-                <TextField color={props.color} type='default' />
+                <TextField color={props.color} type='default' onAddTask={props.handleAddTask}/>
                 <AutoLayout
                     name='Container'
                     spacing={Spacing.m}
