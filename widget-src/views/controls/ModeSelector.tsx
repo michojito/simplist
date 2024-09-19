@@ -15,7 +15,7 @@ type Props = {
 }
 
 export function ModeSelector (props: Props) {
-    const [active, setActive] = useSyncedState("active", false)
+    const isCurrentMode = (props.mode === 'Light') === props.lightMode
 
     
     return (
@@ -28,7 +28,8 @@ export function ModeSelector (props: Props) {
             <AutoLayout
                 name='Frame'
                 cornerRadius={6}
-                stroke={undefined}
+                stroke={isCurrentMode ? props.color.accent.medium : props.color.neutrals.lower}
+                strokeWidth={1}
                 padding={2}
                 hoverStyle={{
                     stroke: props.color?.neutrals.lower

@@ -13,12 +13,12 @@ import { HeaderButton } from "../../views/header/HeaderButton";
 
 type Props = {
     color: ColorPalette
-
     onMenu?: ((event: WidgetClickEvent) => void | Promise<any>)
     lightMode: {
         current: boolean,
         set: (newValue: boolean | ((currValue: boolean) => boolean)) => void
     }
+    setColor: (newValue: ColorPalette) => void
 }
 
 export function SettingsPage (props: Props) {
@@ -65,12 +65,18 @@ export function SettingsPage (props: Props) {
                             <ModeSelector 
                                 color={props.color} mode='Light'
                                 lightMode={props.lightMode.current}
-                                onClick={() => {props.lightMode.set(true) }}
+                                onClick={() => {
+                                    props.lightMode.set(true);
+                                    props.setColor(new ColorPalette(true));
+                                }}
                             />
                             <ModeSelector 
                                 color={props.color} mode='Dark'
                                 lightMode={props.lightMode.current}
-                                onClick={() => { props.lightMode.set(false) }}
+                                onClick={() => {
+                                    props.lightMode.set(false);
+                                    props.setColor(new ColorPalette(false));
+                                }}
                             />
 
                         </AutoLayout>
