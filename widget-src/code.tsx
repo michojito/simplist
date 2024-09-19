@@ -40,6 +40,7 @@ function Main () {
   if (mode.settingOpen) {
     return (
       <SettingsPage 
+      setColor={setColor}
       color={color} 
       lightMode={{
         current: lightMode,
