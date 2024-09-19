@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SimpList</title>
+</head>
+<body>
+    <script>
+    window.onmessage = async (event) => {
+      if (event.data.pluginMessage.type === 'open-url') {
+        window.open(event.data.pluginMessage.url, '_blank');
+        parent.postMessage({ pluginMessage: { type: 'url-opened' } }, '*');
+      }
+    };
+    </script>
+</body>
+</html>
