@@ -11,6 +11,8 @@ type Props = {
     // Styling
     color?: ColorPalette
 
+    placeholder?: string
+
 }
 export function OnlyTextField (props: Props) {
     const [text, setText] = useSyncedState("text", "")
@@ -32,7 +34,7 @@ export function OnlyTextField (props: Props) {
                 <Input 
                     name='Input'
                     value={text}
-                    placeholder={TextLibrary.inputPlaceholder}
+                    placeholder={props.placeholder ?? "Enter a color hex"}
                     width='fill-parent'
                     fontFamily={Font.family}
                     fontSize={Font.body.medium.size}

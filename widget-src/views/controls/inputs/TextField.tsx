@@ -13,6 +13,7 @@ type Props = {
 
     // Styling
     color?: ColorPalette
+    placeholder?: string
 
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 
@@ -31,7 +32,7 @@ export function TextField(props: Props) {
             )
         case 'only':
             return (
-                <OnlyTextField color={props.color} />
+                <OnlyTextField color={props.color} placeholder={props.placeholder} />
             )
     }
 }
