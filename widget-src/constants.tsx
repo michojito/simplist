@@ -1,4 +1,4 @@
-import { shadeColor } from "./utils"
+import { shadeColor, calculateBrightness } from "./utils"
 
 export const App = {
     author: 'Michel R.',
@@ -45,6 +45,7 @@ export const Colors = {
         red   : '#F21363',
         gray  : '#6B6B6B',
         black : '#000000',
+        white : '#FFFFFF'
     },
 
 }
@@ -84,7 +85,7 @@ export class ColorPalette {
         high  : string,
     }
 
-    constructor (lightMode: boolean) {
+    constructor(lightMode: boolean, customColor?: string) {
         this.neutrals = {
             lowest : lightMode ? Colors.neutrals[100] : Colors.neutrals[800],
             lower  : lightMode ? Colors.neutrals[200] : Colors.neutrals[700],
@@ -116,6 +117,17 @@ export class ColorPalette {
         this.accent = {
             medium: lightMode ? Colors.accent.blue : shadeColor(Colors.accent.blue, 30),
             high  : lightMode ? shadeColor(Colors.accent.blue, -20) : Colors.accent.blue,
+        }
+        if (customColor) {
+            // Apply custom color logic here
+            const brightness = calculateBrightness(customColor);
+            const textColor = brightness > 128 ? Colors.neutrals[900] : Colors.neutrals[0];
+
+            this.accent = {
+                medium: lightMode ? customColor : shadeColor(customColor, 30),
+                high: lightMode ? shadeColor(customColor, -20) : shadeColor(customColor, 20),
+            }
+            this.text.accent = textColor;
         }
     }
 }

@@ -30,3 +30,22 @@ export function shadeColor(color: string, percent: number): string {
 
     return "#"+RR+GG+BB;
 }
+
+/**
+ * Calculates the brightness of a color based on its hexadecimal value.
+ * 
+ * This function uses the following formula to calculate perceived brightness:
+ * (Red * 299 + Green * 587 + Blue * 114) / 1000
+ * 
+ * The result ranges from 0 (darkest) to 255 (brightest).
+ * 
+ * @param hex - The hexadecimal color code (e.g., "#RRGGBB").
+ * @returns The perceived brightness of the color, ranging from 0 to 255.
+ */
+export function calculateBrightness(hex: string): number {
+    const rgb = parseInt(hex.slice(1), 16);
+    const r = (rgb >> 16) & 0xff;
+    const g = (rgb >>  8) & 0xff;
+    const b = (rgb >>  0) & 0xff;
+    return (r * 299 + g * 587 + b * 114) / 1000;
+}

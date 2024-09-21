@@ -31,15 +31,17 @@ function Main () {
   // Colors
   const [lightMode, setLightMode] = useSyncedState('lightMode', true)
   const [color, setColor] = useSyncedState('color', new ColorPalette(lightMode))
+  const [customAccentColor, setCustomAccentColor] = useSyncedState('customAccentColor', undefined as string | undefined);
+
   // Tasks
   const [tasks, setTasks] = useSyncedState("tasks", [] as Task[]);
-  
 
   // Open Setting View
   if (settingsModalOpen) {
     return (
       <SettingsPage 
       setColor={setColor}
+      customAccentColor={customAccentColor}
       color={color} 
       lightMode={{
         current: lightMode,
@@ -47,6 +49,10 @@ function Main () {
       }}
       ModalState={settingsModalOpen} setModalState={setSettingsModalOpen}
       colorModalOpen={colorModalOpen} setColorModalOpen={setColorModalOpen}
+      onColorChange={(newColor) => {
+        setCustomAccentColor(newColor);
+        setColor(new ColorPalette(lightMode, newColor));
+      }}
       />
     )
   }

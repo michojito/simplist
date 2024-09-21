@@ -15,6 +15,9 @@ type Props = {
 
     //styling
     color: ColorPalette
+
+    onColorChange: (color: string) => void
+    lightmode: boolean
 }
 
 export function ColorSelectorModal (props:Props) {
@@ -26,8 +29,19 @@ export function ColorSelectorModal (props:Props) {
         Colors.accent.purple,
         Colors.accent.red,
         Colors.accent.gray,
-        Colors.accent.black,
+        props.lightMode ? Colors.accent.black : Colors.accent.white,
     ]
+
+    const handleColorSelect = (color: string) => {
+        props.onColorChange(color);
+    }
+
+    const handleTextFieldChange = (text: string) => {
+        if (/^#[0-9A-Fa-f]{6}$/.test(text)) {
+            props.onColorChange(text);
+        }
+    }
+
     return(
         <Modal
             position={props.position}
@@ -35,6 +49,7 @@ export function ColorSelectorModal (props:Props) {
             x={props.x}
             padding={Spacing.xs}
             width={225}
+            fill={props.color.background.modal}
         >
             <AutoLayout
                 name="ColorSelector"
@@ -50,20 +65,21 @@ export function ColorSelectorModal (props:Props) {
                     wrap={true}
                     horizontalAlignItems="center"
                 >
-                    {colors.map(color => {
-
-                        return (
-                            <ColorSelector 
+                    {colors.map(color => (
+                        <ColorSelector 
                             key={color}
-                            color={color} colors={props.color} 
-                            onClick={ () => {
-                                console.log('click')
-                            }}
-                            />
-                        )
-                    })}
+                            color={color} 
+                            colors={props.color} 
+                            onClick={() => handleColorSelect(color)}
+                        />
+                    ))}
                 </AutoLayout>
-                <TextField color={props.color} placeholder={props.color.accent.medium} type='only'/>
+                <TextField 
+                    color={props.color} 
+                    placeholder={props.color.accent.medium} 
+                    type='only'
+                    onTextEditEnd={(e) => handleTextFieldChange(e.characters)}
+                />
             </AutoLayout>
         </Modal>
     )

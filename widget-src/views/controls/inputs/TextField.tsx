@@ -18,6 +18,8 @@ type Props = {
     onClick?: ((event: WidgetClickEvent) => void | Promise<any>)
 
     onAddTask?: (taskContent: string) => void
+
+    onTextEditEnd?: (e: any) => void
 }
 export function TextField(props: Props) {
 
@@ -32,7 +34,7 @@ export function TextField(props: Props) {
             )
         case 'only':
             return (
-                <OnlyTextField color={props.color} placeholder={props.placeholder} />
+                <OnlyTextField color={props.color} placeholder={props.placeholder} onTextEditEnd={props.onTextEditEnd} />
             )
     }
 }
