@@ -10,8 +10,8 @@ type Props = {
 
     // Styling
     color?: ColorPalette
-
     placeholder?: string
+    onTextEditEnd?: (event: TextEditEvent) => void
 
 }
 export function OnlyTextField (props: Props) {
@@ -40,10 +40,7 @@ export function OnlyTextField (props: Props) {
                     fontSize={Font.body.medium.size}
                     fontWeight={Font.body.medium.weight}
                     lineHeight={Font.body.medium.lineHeight}
-                    onTextEditEnd={(e) => {
-                        setText(e.characters);
-                        setErr(false);
-                    }}
+                    onTextEditEnd={props.onTextEditEnd ?? (() => {})}
                     placeholderProps={{
                         fill: err ? props.color?.danger.medium : props.color?.text.secondary,
                         opacity: 1

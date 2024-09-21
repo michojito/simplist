@@ -15,11 +15,13 @@ import { ColorSelectorModal } from "../../views/modals/ColorSelectorModal";
 type Props = {
     // Color Mode
     color: ColorPalette
+    customAccentColor: string | undefined
     setColor: (newValue: ColorPalette) => void
     lightMode: {
         current: boolean,
         set: (newValue: boolean | ((currValue: boolean) => boolean)) => void
     }
+    onColorChange: (newColor: any) => void
 
     // Modal State
     ModalState: boolean
@@ -76,7 +78,7 @@ export function SettingsPage(props: Props) {
                                     lightMode={props.lightMode.current}
                                     onClick={() => {
                                         props.lightMode.set(true);
-                                        props.setColor(new ColorPalette(true));
+                                        props.setColor(new ColorPalette(true, props.customAccentColor));
                                     }}
                                 />
                                 <ModeSelector
@@ -84,7 +86,7 @@ export function SettingsPage(props: Props) {
                                     lightMode={props.lightMode.current}
                                     onClick={() => {
                                         props.lightMode.set(false);
-                                        props.setColor(new ColorPalette(false));
+                                        props.setColor(new ColorPalette(false, props.customAccentColor));
                                     }}
                                 />
 
@@ -143,6 +145,8 @@ export function SettingsPage(props: Props) {
                     position='absolute'
                     x={{ type: 'right', offset: -241 }} y={0}
                     color={props.color}
+                    onColorChange={props.onColorChange}
+                    lightMode={props.lightMode}
                 />
             }
         </AutoLayout>
