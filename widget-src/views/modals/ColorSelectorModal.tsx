@@ -63,7 +63,7 @@ export function ColorSelectorModal (props:Props) {
                         )
                     })}
                 </AutoLayout>
-                <TextField color={props.color} type='only'/>
+                <TextField color={props.color} placeholder={props.color.accent.medium} type='only'/>
             </AutoLayout>
         </Modal>
     )
