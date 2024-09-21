@@ -146,7 +146,6 @@ export function SettingsPage(props: Props) {
                     x={{ type: 'right', offset: -241 }} y={0}
                     color={props.color}
                     onColorChange={props.onColorChange}
-                    lightMode={props.lightMode}
                 />
             }
         </AutoLayout>

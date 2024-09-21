@@ -14,27 +14,31 @@ export const App = {
 export const Colors = {
     neutrals: {
         0   : '#FFFFFF',
-        100 : '#EFEFEF',
-        200 : '#DEDEDE',
-        300 : '#CCCCCC',
-        400 : '#B2B2B2',
-        500 : '#8A8A8A',
-        600 : '#6E6E6E',
-        700 : '#585858',
-        800 : '#333333',
-        900 : '#161616',
+        50  : '#FBFCFC',
+        100 : '#F0F2F3',
+        200 : '#DFE3E5',
+        300 : '#C9CFD2',
+        400 : '#B0B6BC',
+        500 : '#959CA3',
+        600 : '#7B8289',
+        700 : '#62696E',
+        800 : '#494F53',
+        900 : '#303538',
+        950 : '#181B1C',
         1000: '#000000',
     },
     red: {
-        100: '#FFB0B2',
-        200: '#F9868D',
-        300: '#EF5868',
-        400: '#EA3B56',
+        50 : '#FFEEEE',
+        100: '#FFBFC6',
+        200: '#FF7F96',
+        300: '#FD406B',
+        400: '#EB114E',
         500: '#E30044',
-        600: '#C5003A',
-        700: '#A80030',
-        800: '#71001D',
-        900: '#3F000C',
+        600: '#CD002E',
+        700: '#AA001B',
+        800: '#80000C',
+        900: '#550002',
+        950: '#2A0000',
     },
     accent: {
         blue  : '#0038FF',
@@ -87,8 +91,8 @@ export class ColorPalette {
 
     constructor(lightMode: boolean, customColor?: string) {
         this.neutrals = {
-            lowest : lightMode ? Colors.neutrals[100] : Colors.neutrals[800],
-            lower  : lightMode ? Colors.neutrals[200] : Colors.neutrals[700],
+            lowest : lightMode ? Colors.neutrals[100] : Colors.neutrals[900],
+            lower  : lightMode ? Colors.neutrals[200] : Colors.neutrals[800],
             low    : lightMode ? Colors.neutrals[300] : Colors.neutrals[600],
             medium : lightMode ? Colors.neutrals[500] : Colors.neutrals[500],
             high   : lightMode ? Colors.neutrals[700] : Colors.neutrals[300],
@@ -96,23 +100,23 @@ export class ColorPalette {
             highest: lightMode ? Colors.neutrals[900] : Colors.neutrals[100],
         }
         this.danger = {
-            lowest : lightMode ? Colors.red[100] : Colors.red[800],
-            lower  : lightMode ? Colors.red[200] : Colors.red[700],
-            low    : lightMode ? Colors.red[300] : Colors.red[600],
-            medium : lightMode ? Colors.red[500] : Colors.red[500],
+            lowest : lightMode ? Colors.red[50]  : Colors.red[950],
+            lower  : lightMode ? Colors.red[200] : Colors.red[800],
+            low    : lightMode ? Colors.red[300] : Colors.red[700],
+            medium : lightMode ? Colors.red[500] : Colors.red[400],
             high   : lightMode ? Colors.red[700] : Colors.red[300],
             higher : lightMode ? Colors.red[800] : Colors.red[200],
             highest: lightMode ? Colors.red[900] : Colors.red[100],
         }
         this.background = {
-            primary  : lightMode ? Colors.neutrals[0] : Colors.neutrals[900],
+            primary  : lightMode ? Colors.neutrals[0] : Colors.neutrals[950],
             secondary: this.neutrals.lowest,
-            modal    : lightMode ? Colors.neutrals[0] : Colors.neutrals[800],
+            modal    : lightMode ? Colors.neutrals[0] : Colors.neutrals[900],
         }
         this.text = {
             primary  : lightMode ? Colors.neutrals[900] : Colors.neutrals[0],
             secondary: lightMode ? Colors.neutrals[500] : Colors.neutrals[400],
-            accent   : lightMode ? Colors.neutrals[0] : Colors.neutrals[0],
+            accent   : Colors.neutrals[0],
         }
         this.accent = {
             medium: lightMode ? Colors.accent.blue : shadeColor(Colors.accent.blue, 30),

@@ -20,7 +20,7 @@ import { ModalContainer } from './views/containers/ModalContainer'
 function Main () {
 
   // State Machine
-  const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', true)
+  const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', false)
   const [powerMode, setPowerMode] = useSyncedState('powerMode', false)
   const [editModeOpen, setEditModeOpen] = useSyncedState('editModeOpen', false)
   const [settingsModalOpen, setSettingsModalOpen] = useSyncedState('settingsModalOpen', false)
@@ -35,6 +35,7 @@ function Main () {
 
   // Tasks
   const [tasks, setTasks] = useSyncedState("tasks", [] as Task[]);
+  const [powerModeTasks, setPowerModeTasks] = useSyncedState('powerModeTasks', [] as Task[])
 
   // Open Setting View
   if (settingsModalOpen) {
@@ -68,12 +69,23 @@ function Main () {
   }
   // Open PowerMode View
   if (powerMode) {
-    return (
-      <PowerModePage color={color}
-      ModalState={powerMode}
-      setModalState={setPowerMode}
-      />
-    )
+    try {
+        return (
+            <PowerModePage 
+                color={color}
+                ModalState={powerMode}
+                setModalState={setPowerMode}
+                tasks={tasks}
+                setTasks={(newTasks) => {
+                    setTasks(newTasks);
+                }}
+            />
+        )
+    } catch (error) {
+        console.error("Error rendering PowerModePage:", error);
+        setPowerMode(false);
+        return null; // or return a fallback UI
+    }
   }
 
   usePropertyMenu(
@@ -91,25 +103,28 @@ function Main () {
     }
   )
 
-  return (
-    <ModalContainer 
-      color={color} 
-      setTask={setTasks} 
-      isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}
-      menuOpen={menuOpen} setMenuOpen={setMenuOpen}
-      editModeOpen={editModeOpen} setEditModeOpen={setEditModeOpen}
-      infoModalOpen={infoModalOpen} setInfoModalOpen={setInfoModalOpen}
-      settingsModalOpen={settingsModalOpen} setSettingsModalOpen={setSettingsModalOpen}
-      colorModalOpen={colorModalOpen} setColorModalOpen={setColorModalOpen}
+  try {
+    return (
+      <ModalContainer 
+        color={color} 
+        setTask={setTasks} 
+        isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}
+        menuOpen={menuOpen} setMenuOpen={setMenuOpen}
+        editModeOpen={editModeOpen} setEditModeOpen={setEditModeOpen}
+        infoModalOpen={infoModalOpen} setInfoModalOpen={setInfoModalOpen}
+        settingsModalOpen={settingsModalOpen} setSettingsModalOpen={setSettingsModalOpen}
+        colorModalOpen={colorModalOpen} setColorModalOpen={setColorModalOpen}
       >
-      <MainPage color={color} 
-      menuOpen={menuOpen} setMenuOpen={setMenuOpen}
-      tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}/>
-    </ModalContainer>
-  )
-
-  
- 
+        <MainPage color={color} 
+          menuOpen={menuOpen} setMenuOpen={setMenuOpen}
+          tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}
+        />
+      </ModalContainer>
+    )
+  } catch (error) {
+    console.error("Error rendering main UI:", error);
+    return null; // or return a fallback UI
+  }
 }
 
 widget.register(Main)

@@ -49,3 +49,19 @@ export function calculateBrightness(hex: string): number {
     const b = (rgb >>  0) & 0xff;
     return (r * 299 + g * 587 + b * 114) / 1000;
 }
+
+export function parseInput(input: string): Task[] {
+    if (!input) return [];
+    
+    return input.split('\n').map((line, index) => {
+        const trimmedLine = line.trim();
+        const isChecked = trimmedLine.toLowerCase().startsWith('[x]');
+        const content = trimmedLine.replace(/^\[[ x]?\]/, '').trim();
+        return {
+            UUID: Date.now() + index,
+            content: content,
+            checked: isChecked,
+            subtasks: []
+        };
+    }).filter(task => task.content !== '');
+}
