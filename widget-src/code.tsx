@@ -21,13 +21,12 @@ function Main () {
 
   // State Machine
   const [isHideCompleted, setHideCompleted] = useSyncedState('isHideCompleted', true)
-  const [mode, setMode] = useSyncedState('mode', {
-    powerMode: false,
-    editOpen: false,
-    settingOpen: false,
-    infoOpen: false,
-    menuOpen: false,
-  })
+  const [powerMode, setPowerMode] = useSyncedState('powerMode', false)
+  const [editModeOpen, setEditModeOpen] = useSyncedState('editModeOpen', false)
+  const [settingsModalOpen, setSettingsModalOpen] = useSyncedState('settingsModalOpen', false)
+  const [infoModalOpen, setInfoModalOpen] = useSyncedState('infoModalOpen', false)
+  const [menuOpen, setMenuOpen] = useSyncedState('MenuOpen', false)
+  const [colorModalOpen, setColorModalOpen] = useSyncedState('ColorModalOpen', false)
 
   // Colors
   const [lightMode, setLightMode] = useSyncedState('lightMode', true)
@@ -37,7 +36,7 @@ function Main () {
   
 
   // Open Setting View
-  if (mode.settingOpen) {
+  if (settingsModalOpen) {
     return (
       <SettingsPage 
       setColor={setColor}
@@ -46,32 +45,28 @@ function Main () {
         current: lightMode,
         set: setLightMode
       }}
-      onMenu={() => {setMode( {
-        powerMode: mode.powerMode,
-        editOpen: mode.editOpen,
-        settingOpen: !mode.settingOpen,
-        infoOpen: mode.infoOpen,
-        menuOpen: mode.menuOpen
-      })}} />
+      ModalState={settingsModalOpen} setModalState={setSettingsModalOpen}
+      colorModalOpen={colorModalOpen} setColorModalOpen={setColorModalOpen}
+      />
     )
   }
   // Open Edit View
-  if (mode.editOpen) {
+  if (editModeOpen) {
     return (
-      <EditPage color={color} onMenu={() => {setMode( {
-        powerMode: mode.powerMode,
-        editOpen: !mode.editOpen,
-        settingOpen: mode.settingOpen,
-        infoOpen: mode.infoOpen,
-        menuOpen: mode.menuOpen})}} 
+      <EditPage color={color}
+        ModalState={editModeOpen}
+        setModalState={setEditModeOpen}
         tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}
         />
     )
   }
   // Open PowerMode View
-  if (mode.powerMode) {
+  if (powerMode) {
     return (
-      <PowerModePage color={color} mode={{state:mode, set:setMode}}/>
+      <PowerModePage color={color}
+      ModalState={powerMode}
+      setModalState={setPowerMode}
+      />
     )
   }
 
@@ -85,20 +80,25 @@ function Main () {
       }
     ], ({propertyName}) => {
       if (propertyName === 'powerMode') {
-        setMode({
-          powerMode: !mode.powerMode,
-          editOpen: mode.editOpen,
-          settingOpen: mode.settingOpen,
-          infoOpen: mode.infoOpen,
-          menuOpen: mode.menuOpen,
-        })
+        setPowerMode(true)
       }
     }
   )
 
   return (
-    <ModalContainer color={color} mode={{state:mode, set:setMode}} setTask={setTasks} isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}>
-      <MainPage color={color} mode={{state:mode, set:setMode}} tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}/>
+    <ModalContainer 
+      color={color} 
+      setTask={setTasks} 
+      isHideCompleted={isHideCompleted} setHideCompleted={setHideCompleted}
+      menuOpen={menuOpen} setMenuOpen={setMenuOpen}
+      editModeOpen={editModeOpen} setEditModeOpen={setEditModeOpen}
+      infoModalOpen={infoModalOpen} setInfoModalOpen={setInfoModalOpen}
+      settingsModalOpen={settingsModalOpen} setSettingsModalOpen={setSettingsModalOpen}
+      colorModalOpen={colorModalOpen} setColorModalOpen={setColorModalOpen}
+      >
+      <MainPage color={color} 
+      menuOpen={menuOpen} setMenuOpen={setMenuOpen}
+      tasks={tasks} setTask={setTasks} isHideCompleted={isHideCompleted}/>
     </ModalContainer>
   )
 

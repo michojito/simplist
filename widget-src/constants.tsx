@@ -11,7 +11,7 @@ export const App = {
     },
 }
 
-const Colors = {
+export const Colors = {
     neutrals: {
         0   : '#FFFFFF',
         100 : '#EFEFEF',

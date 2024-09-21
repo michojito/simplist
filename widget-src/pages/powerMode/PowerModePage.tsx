@@ -11,34 +11,9 @@ import { HeaderPower } from "../../views/header/HeaderPower";
 type Props = {
     color: ColorPalette
 
-    mode: {
-        state: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }
-        set: (newValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        } | ((currValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }) => {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        })) => void
-    }
+    // Modal State
+    ModalState: boolean
+    setModalState: (newValue: boolean | ((currValue: boolean) => boolean)) => void
 }
 export function PowerModePage (props: Props) {
     
@@ -64,24 +39,13 @@ export function PowerModePage (props: Props) {
                 >
                     <Button type='ghost' width={150} height='fill-parent' color={props.color} content={TextLibrary.button.powerCancel}
                         onClick={() => {
-                            props.mode.set({
-                                powerMode: !props.mode.state.powerMode,
-                                editOpen: props.mode.state.editOpen,
-                                settingOpen: props.mode.state.settingOpen,
-                                infoOpen: props.mode.state.infoOpen,
-                                menuOpen: props.mode.state.menuOpen,
-                              })
+                            props.setModalState(false)
                         }}
                     />
                     <Button type='primary' width={150} color={props.color} content={TextLibrary.button.powerSave}
                         onClick={() => {
-                            props.mode.set({
-                                powerMode: !props.mode.state.powerMode,
-                                editOpen: props.mode.state.editOpen,
-                                settingOpen: props.mode.state.settingOpen,
-                                infoOpen: props.mode.state.infoOpen,
-                                menuOpen: props.mode.state.menuOpen,
-                              })
+                            // TODO: Save action
+                            props.setModalState(false)
                         }}
                     />
                 </AutoLayout>
