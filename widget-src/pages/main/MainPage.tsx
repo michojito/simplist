@@ -17,34 +17,10 @@ type Props = {
 
     isHideCompleted: Boolean
 
-    mode: {
-        state: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }
-        set: (newValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        } | ((currValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }) => {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        })) => void
-    }
+    // Modals
+    menuOpen: boolean
+    setMenuOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
 }
 
 export function MainPage (props: Props) {
@@ -71,10 +47,7 @@ export function MainPage (props: Props) {
             <EmptyPage 
                 color={props.color} 
                 onMenu={() => {
-                    props.mode.set({
-                        ...props.mode.state,
-                        menuOpen: !props.mode.state.menuOpen
-                    })
+                    props.setMenuOpen(!props.menuOpen)
                 }}
                 handleAddTask={handleAddTask}
             />
@@ -84,10 +57,7 @@ export function MainPage (props: Props) {
             <FilledPage 
                 color={props.color}
                 onMenu={() => {
-                    props.mode.set({
-                        ...props.mode.state,
-                        menuOpen: !props.mode.state.menuOpen
-                    })
+                    props.setMenuOpen(!props.menuOpen)
                 }}
                 tasks={props.tasks}
                 handleAddTask={handleAddTask}

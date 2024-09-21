@@ -20,11 +20,17 @@ type TaskType = {
 };
 
 type Props = {
+    // Modal State
+    ModalState: boolean
+    setModalState: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
+
+    // Features
     color: ColorPalette
     isHideCompleted: Boolean
     tasks: TaskType[]
     setTask: (newValue: TaskType[] | ((currValue: TaskType[]) => TaskType[])) => void
-    onMenu?: ((event: WidgetClickEvent) => void | Promise<any>)
+    
 }
 
 export function EditPage (props: Props) {
@@ -34,7 +40,7 @@ export function EditPage (props: Props) {
 
     return (
         <Window fill={props.color.background.primary} stroke={props.color.neutrals.lowest}>
-            <HeaderButton title='Edit' color={props.color} onClick={props.onMenu}/>
+            <HeaderButton title='Edit' color={props.color} onClick={() => {props.setModalState(false)}}/>
 
             <AutoLayout
                 name='Content'

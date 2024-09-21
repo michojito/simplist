@@ -1,14 +1,15 @@
 const { widget } = figma
-const {AutoLayout} = widget
+const { AutoLayout } = widget
 
 // Imports
 import { ColorPalette } from "../../../constants"
 import { IconName } from "../../../models/IconLibrary"
 import { DefaultTextField } from "./DefaultTextField"
+import { OnlyTextField } from "./OnlyTextField"
 import { PlaceholderTextField } from "./PlaceholderTextField"
 
 type Props = {
-    type: 'default' | 'placeholder'
+    type: 'default' | 'placeholder' | 'only'
 
     // Styling
     color?: ColorPalette
@@ -17,16 +18,20 @@ type Props = {
 
     onAddTask?: (taskContent: string) => void
 }
-export function TextField (props: Props) {
+export function TextField(props: Props) {
 
     switch (props.type) {
         case 'default':
             return (
-                <DefaultTextField color={props.color} onAddTask={props.onAddTask!}/>
+                <DefaultTextField color={props.color} onAddTask={props.onAddTask!} />
             )
         case 'placeholder':
             return (
                 <PlaceholderTextField color={props.color} />
+            )
+        case 'only':
+            return (
+                <OnlyTextField color={props.color} />
             )
     }
 }

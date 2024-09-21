@@ -14,105 +14,75 @@ type TaskType = {
 };
 
 type Props = {
-    color: ColorPalette
-    children?: FigmaDeclarativeNode
+    // Modals
+    menuOpen: boolean
+    setMenuOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
 
+    editModeOpen: boolean
+    setEditModeOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
+    infoModalOpen: boolean
+    setInfoModalOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
+    settingsModalOpen: boolean
+    setSettingsModalOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
+    colorModalOpen: boolean
+    setColorModalOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void
+
+    // Component
+    children?: FigmaDeclarativeNode
+    color: ColorPalette
+    
+    // Feature
     isHideCompleted: Boolean
     setHideCompleted: (newValue: boolean | ((currValue: boolean) => boolean)) => void
-
     setTask: (newValue: TaskType[] | ((currValue: TaskType[]) => TaskType[])) => void
-
-    mode: {
-        state: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }
-        set: (newValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        } | ((currValue: {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        }) => {
-            powerMode: boolean;
-            editOpen: boolean;
-            settingOpen: boolean;
-            infoOpen: boolean;
-            menuOpen: boolean;
-        })) => void
-    }
 }
+
+
 export function ModalContainer(props: Props) {
 
     return (
         <AutoLayout name='Widget' overflow='visible'>
             {props.children}
 
-            {props.mode.state.menuOpen &&
+            {props.menuOpen &&
                 <MenuModal position='absolute'
                     x={{ type: 'right', offset: -202 }} y={64}
                     color={props.color}
                     isHideCompleted={props.isHideCompleted}
                     onClick={{
                         Infos: () => {
-                            props.mode.set({
-                                powerMode: props.mode.state.powerMode,
-                                editOpen: props.mode.state.editOpen,
-                                settingOpen: props.mode.state.settingOpen,
-                                infoOpen: !props.mode.state.infoOpen,
-                                menuOpen: !props.mode.state.menuOpen
-                            })
+                            props.setInfoModalOpen(!props.infoModalOpen)
+                            props.setMenuOpen(!props.menuOpen)
                         },
                         Edit: () => {
-                            props.mode.set({
-                                powerMode: props.mode.state.powerMode,
-                                editOpen: !props.mode.state.editOpen,
-                                settingOpen: props.mode.state.settingOpen,
-                                infoOpen: props.mode.state.infoOpen,
-                                menuOpen: !props.mode.state.menuOpen
-                            })
+                            props.setEditModeOpen(!props.editModeOpen)
+                            props.setMenuOpen(!props.menuOpen)
                         },
                         Settings: () => {
-                            props.mode.set({
-                                powerMode: props.mode.state.powerMode,
-                                editOpen: props.mode.state.editOpen,
-                                settingOpen: !props.mode.state.settingOpen,
-                                infoOpen: props.mode.state.infoOpen,
-                                menuOpen: !props.mode.state.menuOpen
-                            })
+                            props.setSettingsModalOpen(!props.settingsModalOpen)
+                            props.setMenuOpen(!props.menuOpen)
                         },
                         HideCompleted: () => {
                             props.setHideCompleted(!props.isHideCompleted)
                         },
                         ClearAll: () => {
-                            props.setTask([]);
+                            props.setTask([])
+                            props.setMenuOpen(!props.menuOpen)
                             console.log('cleared')
                         }
                     }}
                 />
             }
 
-            {props.mode.state.infoOpen &&
+            {props.infoModalOpen &&
                 <InfoModal position='absolute'
                     x={{ type: 'left', offset: -266 }} y={0}
                     color={props.color}
                     onClick={() => {
-                        props.mode.set({
-                            powerMode: props.mode.state.powerMode,
-                            editOpen: props.mode.state.editOpen,
-                            settingOpen: props.mode.state.settingOpen,
-                            infoOpen: !props.mode.state.infoOpen,
-                            menuOpen: props.mode.state.menuOpen
-                        })
+                        props.setInfoModalOpen(!props.infoModalOpen)
                     }}
                 />
             }
