@@ -17,7 +17,6 @@ type Props = {
     color: ColorPalette
 
     onColorChange: (color: string) => void
-    lightmode: boolean
 }
 
 export function ColorSelectorModal (props:Props) {
@@ -29,7 +28,7 @@ export function ColorSelectorModal (props:Props) {
         Colors.accent.purple,
         Colors.accent.red,
         Colors.accent.gray,
-        props.lightMode ? Colors.accent.black : Colors.accent.white,
+        Colors.accent.black,
     ]
 
     const handleColorSelect = (color: string) => {
