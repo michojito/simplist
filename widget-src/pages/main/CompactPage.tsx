@@ -8,6 +8,9 @@ type Props = {
   // Modals
   menuOpen: boolean;
   setMenuOpen: (newValue: boolean | ((currValue: boolean) => boolean)) => void;
+
+  // Tasks
+  tasks?: Task[]; // Optional because we only need to display the count
 };
 
 export function CompactPage(props: Props) {
@@ -17,11 +20,12 @@ export function CompactPage(props: Props) {
       stroke={props.color.neutrals.lowest}
     >
       <Header
-        title="Todo"
+        title={`Todo (${props.tasks?.length ?? 0})`}
         color={props.color}
         onClick={() => {
           props.setMenuOpen(!props.menuOpen);
         }}
+        noLine
       />
     </Window>
   );

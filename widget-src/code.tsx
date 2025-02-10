@@ -169,6 +169,7 @@ function Main() {
             color={color}
             menuOpen={menuOpen}
             setMenuOpen={setMenuOpen}
+            tasks={tasks}
           />
         </ModalContainer>
       );
