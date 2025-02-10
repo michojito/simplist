@@ -14,13 +14,16 @@ type Props = {
 };
 
 export function CompactPage(props: Props) {
+  const numberOfActiveTasks =
+    props.tasks?.filter((task) => !task.checked).length ?? 0;
+
   return (
     <Window
       fill={props.color.background.primary}
       stroke={props.color.neutrals.lowest}
     >
       <Header
-        title={`Todo (${props.tasks?.length ?? 0})`}
+        title={`Todo (${numberOfActiveTasks})`}
         color={props.color}
         onClick={() => {
           props.setMenuOpen(!props.menuOpen);
