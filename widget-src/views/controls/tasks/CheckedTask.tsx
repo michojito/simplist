@@ -21,6 +21,7 @@ export function CheckedTask(props: Props) {
       width="fill-parent"
       direction="horizontal"
       spacing={Spacing.xxs}
+      verticalAlignItems="center"
       padding={{
         top: Spacing.none,
         bottom: Spacing.none,

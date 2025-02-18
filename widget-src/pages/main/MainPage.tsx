@@ -18,22 +18,20 @@ type Props = {
 
 export function MainPage(props: Props) {
   const handleAddTask = (taskContent: string) => {
-    const newTask = {
-      UUID: Date.now(),
-      content: taskContent,
-      checked: false,
-      position: props.tasks.length, // New position at the end
-      subtasks: [],
-    };
-    props.setTask((prevTasks) => [...prevTasks, newTask]);
+    const task = new Task(taskContent, props.tasks.length);
+    props.setTask((prevTasks) => [...prevTasks, task]);
   };
 
   const handleCheckTask = (taskUUID: number) => {
-    props.setTask((prevTasks) =>
-      prevTasks.map((task) =>
+    console.log("Checking task:", taskUUID); // Ajoutons des logs pour debug
+    props.setTask((prevTasks) => {
+      console.log("Previous tasks:", prevTasks);
+      const newTasks = prevTasks.map((task) =>
         task.UUID === taskUUID ? { ...task, checked: !task.checked } : task
-      )
-    );
+      );
+      console.log("New tasks:", newTasks);
+      return newTasks;
+    });
   };
 
   const handleMoveTask = (index: number, direction: "up" | "down") => {
