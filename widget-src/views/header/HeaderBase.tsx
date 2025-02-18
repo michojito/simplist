@@ -9,6 +9,7 @@ import { Button } from "../controls/buttons/Button";
 type Props = {
   title: string;
   color: ColorPalette;
+  padding?: WidgetJSX.Padding;
 
   onClick?: (event: WidgetClickEvent) => void | Promise<any>;
 
@@ -21,6 +22,7 @@ export function Header(props: Props) {
       name="Header"
       direction="vertical"
       spacing={Spacing.m}
+      padding={props.padding ?? 0}
       width="fill-parent"
     >
       <AutoLayout

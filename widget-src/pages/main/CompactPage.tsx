@@ -1,6 +1,7 @@
 import { ColorPalette } from "../../constants";
 import { Window } from "../../views/containers/Window";
 import { Header } from "../../views/header/HeaderBase";
+import { Task } from "../../models/Task";
 
 type Props = {
   color: ColorPalette;
