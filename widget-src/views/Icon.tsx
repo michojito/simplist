@@ -1,37 +1,41 @@
-import { iconLibrary, IconName } from "../models/IconLibrary"
+import { iconLibrary, IconName } from "../models/IconLibrary";
 
-const { widget } = figma
-const { SVG } = widget
-
+const { widget } = figma;
+const { SVG } = widget;
 
 type Props = {
-    name: string
-    size?: {w: number, h: number} | 'small' | 'medium' | 'large'
-    svg: IconName
-    fill?: string
-}
-export function Icon (props: Props){
-    var size: {w: number, h: number}
+  name: string;
+  size?: { w: number; h: number } | "small" | "medium" | "large";
+  svg: IconName;
+  fill?: string;
 
-    if (props.size === 'small') {
-        size = {w: 16, h: 16}
+  onClick?: (event: WidgetClickEvent) => void | Promise<any>;
 
-    } else if (props.size === 'medium') {
-        size = {w: 24, h: 24}
+  hoverStyle?: WidgetJSX.HoverStyle;
+  opacity?: number;
+};
+export function Icon(props: Props) {
+  var size: { w: number; h: number };
 
-    } else if (props.size === 'large') {
-        size = {w: 36, h: 36}
+  if (props.size === "small") {
+    size = { w: 16, h: 16 };
+  } else if (props.size === "medium") {
+    size = { w: 24, h: 24 };
+  } else if (props.size === "large") {
+    size = { w: 36, h: 36 };
+  } else {
+    size = { w: props.size?.w || 24, h: props.size?.h || 24 };
+  }
 
-    } else {
-        size = {w: props.size?.w || 24, h: props.size?.h|| 24}
-    }
-
-    return (
-        <SVG
-            name={props.name}
-            width={size.w}
-            height={size.h}
-            src={iconLibrary(props.svg, props.fill || '#000')}
-        />
-    )
+  return (
+    <SVG
+      name={props.name}
+      width={size.w}
+      height={size.h}
+      src={iconLibrary(props.svg, props.fill || "#000")}
+      onClick={props.onClick}
+      hoverStyle={props.hoverStyle}
+      opacity={props.opacity}
+    />
+  );
 }

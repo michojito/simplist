@@ -1,20 +1,22 @@
 /**
  * Class Model for the Task
  */
-class Task {
+export class Task {
+  static nextId = 1; // Compteur statique pour les IDs
+  // Identifty
+  UUID: number;
+  content: string;
+  checked: boolean;
+  position: number;
 
-    // Identifty
-    UUID : number
-    content: string
-    checked: boolean
-    
-    subtasks: Task[];
+  subtasks: Task[];
 
-    constructor(content: string) {
-        this.UUID = Date.now()
-        this.checked = false
-        this.content = content
-        this.subtasks = [];
-    }
+  constructor(content: string, position: number) {
+    this.UUID = Date.now() + Task.nextId++;
+    this.checked = false;
+    this.content = content;
+    this.position = position;
 
+    this.subtasks = [];
+  }
 }
