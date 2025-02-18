@@ -13,6 +13,7 @@ import { CompactPage } from "./pages/main/CompactPage";
 import { PowerModePage } from "./pages/powerMode/PowerModePage";
 import { SettingsPage } from "./pages/settings/SettingsPage";
 import { ModalContainer } from "./views/containers/ModalContainer";
+import { Task } from "./models/Task";
 
 // Components
 
@@ -56,9 +57,15 @@ function Main() {
 
   // Tasks
   const [tasks, setTasks] = useSyncedState("tasks", [] as Task[]);
-  const [powerModeTasks, setPowerModeTasks] = useSyncedState(
-    "powerModeTasks",
-    [] as Task[]
+
+  // Power Mode
+  const [powerModeInput, setPowerModeInput] = useSyncedState(
+    "powerModeInput",
+    ""
+  );
+  const [powerModeInitialized, setPowerModeInitialized] = useSyncedState(
+    "powerModeInitialized",
+    false
   );
 
   // Open Setting View
@@ -108,6 +115,10 @@ function Main() {
           setTasks={(newTasks) => {
             setTasks(newTasks);
           }}
+          powerModeInput={powerModeInput}
+          setPowerModeInput={setPowerModeInput}
+          powerModeInitialized={powerModeInitialized}
+          setPowerModeInitialized={setPowerModeInitialized}
         />
       );
     } catch (error) {
@@ -164,6 +175,8 @@ function Main() {
           setSettingsModalOpen={setSettingsModalOpen}
           colorModalOpen={colorModalOpen}
           setColorModalOpen={setColorModalOpen}
+          setPowerModeInput={setPowerModeInput}
+          setPowerModeInitialized={setPowerModeInitialized}
         >
           <CompactPage
             color={color}
@@ -190,6 +203,8 @@ function Main() {
         setSettingsModalOpen={setSettingsModalOpen}
         colorModalOpen={colorModalOpen}
         setColorModalOpen={setColorModalOpen}
+        setPowerModeInput={setPowerModeInput}
+        setPowerModeInitialized={setPowerModeInitialized}
       >
         <MainPage
           color={color}

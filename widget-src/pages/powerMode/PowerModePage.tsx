@@ -18,35 +18,39 @@ type Props = {
   setModalState: (
     newValue: boolean | ((currValue: boolean) => boolean)
   ) => void;
+
+  // Power Mode
+  powerModeInput: string;
+  setPowerModeInput: (
+    newValue: string | ((currValue: string) => string)
+  ) => void;
+  powerModeInitialized: boolean;
+  setPowerModeInitialized: (
+    newValue: boolean | ((currValue: boolean) => boolean)
+  ) => void;
 };
 
 export function PowerModePage(props: Props) {
-  const [inputText, setInputText] = useSyncedState("powerModeInput", "");
-  const [isInitialized, setIsInitialized] = useSyncedState(
-    "powerModeInitialized",
-    false
-  );
-
   useEffect(() => {
-    if (!isInitialized && props.tasks.length > 0) {
+    if (!props.powerModeInitialized && props.tasks.length > 0) {
       const newTaskText = props.tasks
         .map((task) => `${task.checked ? "[x]" : "[]"} ${task.content}`)
         .join("\n");
-      setInputText(newTaskText);
-      setIsInitialized(true);
+      props.setPowerModeInput(newTaskText);
+      props.setPowerModeInitialized(true);
     }
   });
 
   const handleTextEditEnd = (e: { characters: string }) => {
-    setInputText(e.characters);
+    props.setPowerModeInput(e.characters);
   };
 
   const handleSave = () => {
     try {
-      const newTasks = parseInput(inputText);
+      const newTasks = parseInput(props.powerModeInput);
       props.setTasks(newTasks);
       props.setModalState(false);
-      setIsInitialized(false);
+      props.setPowerModeInitialized(false);
     } catch (error) {
       console.error("Error saving tasks:", error);
     }
@@ -54,7 +58,7 @@ export function PowerModePage(props: Props) {
 
   const handleCancel = () => {
     props.setModalState(false);
-    setIsInitialized(false);
+    props.setPowerModeInitialized(false);
   };
 
   return (
@@ -71,7 +75,7 @@ export function PowerModePage(props: Props) {
         width="fill-parent"
       >
         <Input
-          value={inputText}
+          value={props.powerModeInput}
           placeholder="Enter tasks (e.g., [] Task or [x] Completed task)"
           width="fill-parent"
           inputBehavior="multiline"
